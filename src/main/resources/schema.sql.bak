@@ -1,0 +1,4 @@
+create table persons (
+	name VARCHAR(50),
+	city VARCHAR(50)
+);
