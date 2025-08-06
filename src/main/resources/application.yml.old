@@ -1,10 +1,12 @@
+server:
+  port: 8040
 spring:
   sql:
     init:
+      mode: always
       platform: h2
   application:
-    name:
-      crud-validation
+    name: crud-validation
   h2:
     console:
       enabled: true
@@ -15,9 +17,10 @@ spring:
     username: sa
     password: '1234'
   jpa:
-    #defer-datasource-initialization: true
-    # hibernate:
-    #  ddl-auto: update
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+
 logging:
   level:
     org.springframework.jdbc.datasource.init: DEBUG

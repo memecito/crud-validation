@@ -1,10 +1,15 @@
 package es.nter.crud_validation.infraestructure.repositories;
 
 import es.nter.crud_validation.domain.models.Person;
-import es.nter.crud_validation.presentation.dto.PersonDto;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface PersonRepository extends JpaRepository<Person,Long> {
+    List<Person> findByCity(String city);
+
     Person findByName(String name);
-    Person update(Person person);
+
+    List<Person> findByActiveTrue(PageRequest pageRequest);
 }

@@ -2,3 +2,15 @@ create table persons (
 	name VARCHAR(50),
 	city VARCHAR(50)
 );
+create table person (
+	username VARCHAR(50),
+	password VARCHAR(50),
+	name VARCHAR(50),
+	surname VARCHAR(50),
+	companyEmail VARCHAR(50),
+	city VARCHAR(50),
+	active VARCHAR(50),
+	createDAte DATE,
+	imageUrl VARCHAR(50),
+	terminationDate DATE
+);

@@ -2,37 +2,48 @@ package es.nter.crud_validation.application.services.impl;
 
 import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
-import es.nter.crud_validation.presentation.dto.PersonDto;
-import es.nter.crud_validation.presentation.mapper.PersonMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    private final PersonMapper personMapper;
+
 
     @Autowired
     PersonRepository personRepository;
 
     @Override
-    public Iterable<PersonDto> getAllPerson(int pageNumber, int pageSize) {
+    public List<Person> getAllPerson(int pageNumber, int pageSize) {
         PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
-        return personRepository.findAll(pageRequest).getContent().stream()
-                .map((personMapper::toDtoStandard)).toList();
+        return personRepository.findAll(pageRequest).getContent().stream().toList();
     }
 
     @Override
-    public PersonDto getPersonById(Long id) {
+    public List<Person> getAllPersonActive(int pageNumber, int pageSize) {
+        PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
+        return personRepository.findByActiveTrue(pageRequest).stream().toList();
+
+    }
+
+    @Override
+    public Person getPersonById(Long id) {
         try{
-            return personRepository.findById(id).map(personMapper::toDtoStandard).orElse(null);
+            return personRepository.findById(id)
+                    .orElseThrow(
+                            ()-> new EntityNotFoundException(id)
+                    );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -40,32 +51,34 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto getPersonByName(String name){
+    public Person getPersonByName(String name){
         try{
-            return personMapper.toDtoStandard(personRepository.findByName(name));
+            return personRepository.findByName(name);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public PersonDto addPerson(PersonDto person) {
+    @Transactional
+    public Person addPerson(Person person) {
         try{
-            personRepository.save(personMapper.toModelStandard(person));
-            return personMapper.toDtoStandard(
-                    personRepository.findByName(person.getName()));
+            personRepository.save(person);
+                    return  personRepository.findByName(person.getName());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public PersonDto deletePersonById(Long id) {
+    @Transactional
+    public Person deletePersonById(Long id) {
         try{
            Optional<Person> person= personRepository.findById(id);
            if(person.isPresent()){
                personRepository.findById(id).ifPresent(personRepository::delete);
-                return personMapper.toDtoStandard(person.get());
+               return person.get();
            }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -73,8 +86,9 @@ public class PersonServiceImpl implements PersonService {
         return null;
     }
 
+    @Transactional
     @Override
-    public PersonDto updatePerson(PersonDto person) {
+    public Person updatePerson(Person person) {
         Person person1= personRepository.findById(person.getId()).orElse(null);
         assert person1 != null;
         if (!Objects.equals(person1.getName(), person.getName())) {
@@ -84,18 +98,21 @@ public class PersonServiceImpl implements PersonService {
         {
             person1.setCity(person.getCity());
         }
-        return personMapper.toDtoStandard(person1);
+        return person1;
     }
 
     @Override
-    public PersonDto updateParam(Long id, String name, String city) {
-        Person person = personMapper.toModelStandard(getPersonById(id));
+    public Person updateParam(Long id, String name, String city) {
+        Person person = getPersonById(id);
+
         if(!Objects.equals(name,"")){
             person.setName(name);
         }
         if(!Objects.equals(city, "")){
             person.setCity(city);
         }
-        return personMapper.toDtoStandard(personRepository.update(person));
+        return personRepository.save(person);
     }
+
+
 }
