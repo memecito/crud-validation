@@ -14,9 +14,8 @@ public interface PersonService {
 
     Person addPerson(Person person);
 
-    Person updatePerson(Person person);
-    Person updateParam(Long id, String name, String city);
+    Person updatePerson(Long id,Person person);
 
-    Person deletePersonById(Long id);
+    void deletePersonById(Long id);
 
 }

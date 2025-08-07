@@ -3,6 +3,7 @@ package es.nter.crud_validation.presentation.controllers;
 import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.presentation.dto.PersonDto;
 import es.nter.crud_validation.presentation.mapper.PersonMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/persons")
+@RequiredArgsConstructor
 public class PersonController {
-    @Autowired
-    PersonService personService;
-    @Autowired
-    private PersonMapper personMapper;
+
+    private final PersonService personService;
+    private final PersonMapper personMapper;
 
     @GetMapping
     public ResponseEntity<List<PersonDto>> getAllPerson(
@@ -56,34 +57,23 @@ public class PersonController {
                                         personDto))));
     }
 
-    @PutMapping
-    public ResponseEntity<PersonDto> updatePerson(@RequestBody PersonDto personDto){
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDto> updatePerson(
+            @PathVariable long id,
+            @RequestBody PersonDto personDto){
         return ResponseEntity.ok(
                 personMapper.toDtoStandard(
-                        personService.updatePerson(
+                        personService.updatePerson(id,
                                 personMapper.toModelStandard(
                                         personDto))));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PersonDto> updateField(
-            @PathVariable Long id,
-            @RequestParam(value = "name", defaultValue = "", required = false) String name,
-            @RequestParam(value = "city", defaultValue = "", required = false) String city){
-        return ResponseEntity.ok(
-                personMapper.toDtoStandard(
-                        personService.updateParam(id, name, city)));
-    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<PersonDto> deletePersonById(@PathVariable Long id){
-        if (personService.getPersonById(id) != null) {
-            return ResponseEntity.ok(
-                    personMapper.toDtoStandard(
-                            personService.deletePersonById(id)));
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity deletePersonById(@PathVariable Long id){
+        personService.deletePersonById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
+
     }
 
 
