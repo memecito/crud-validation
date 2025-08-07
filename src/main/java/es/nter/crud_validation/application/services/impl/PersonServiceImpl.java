@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class PersonServiceImpl implements PersonService {
     PersonRepository personRepository;
 
     @Override
-    public Iterable<Person> getAllPerson(int pageNumber, int pageSize) {
+    public List<Person> getAllPerson(int pageNumber, int pageSize) {
         PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
         return personRepository.findAll(pageRequest).getContent().stream()
                 .toList();

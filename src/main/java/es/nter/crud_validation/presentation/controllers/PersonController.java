@@ -22,7 +22,9 @@ public class PersonController {
             @RequestParam (defaultValue = "0", required = false) int pageNumber,
             @RequestParam (defaultValue = "5", required = false) int pageSize){
         return ResponseEntity.ok(
-                personService.getAllPerson(pageNumber, pageSize));
+                personService.getAllPerson(pageNumber, pageSize)
+                        .stream().map(personMapper::toDtoStandard).toList()
+        );
     }
 
     @GetMapping("/{id}")
