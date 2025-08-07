@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,16 +24,16 @@ public class PersonServiceImpl implements PersonService {
     PersonRepository personRepository;
 
     @Override
-    public Iterable<PersonDto> getAllPerson(int pageNumber, int pageSize) {
+    public List<Person> getAllPerson(int pageNumber, int pageSize) {
         PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
         return personRepository.findAll(pageRequest).getContent().stream()
-                .map((personMapper::toDtoStandard)).toList();
+                .toList();
     }
 
     @Override
-    public PersonDto getPersonById(Long id) {
+    public Person getPersonById(Long id) {
         try{
-            return personRepository.findById(id).map(personMapper::toDtoStandard).orElse(null);
+            return personRepository.findById(id).orElse(null);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -40,32 +41,31 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto getPersonByName(String name){
+    public Person getPersonByName(String name){
         try{
-            return personMapper.toDtoStandard(personRepository.findByName(name));
+            return personRepository.findByName(name);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public PersonDto addPerson(PersonDto person) {
+    public Person addPerson(Person person) {
         try{
-            personRepository.save(personMapper.toModelStandard(person));
-            return personMapper.toDtoStandard(
-                    personRepository.findByName(person.getName()));
+            Person person1= personRepository.save(person);
+            return person1;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public PersonDto deletePersonById(Long id) {
+    public Person deletePersonById(Long id) {
         try{
            Optional<Person> person= personRepository.findById(id);
            if(person.isPresent()){
                personRepository.findById(id).ifPresent(personRepository::delete);
-                return personMapper.toDtoStandard(person.get());
+                return person.get();
            }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -74,7 +74,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto updatePerson(PersonDto person) {
+    public Person updatePerson(Person person) {
         Person person1= personRepository.findById(person.getId()).orElse(null);
         assert person1 != null;
         if (!Objects.equals(person1.getName(), person.getName())) {
@@ -84,18 +84,18 @@ public class PersonServiceImpl implements PersonService {
         {
             person1.setCity(person.getCity());
         }
-        return personMapper.toDtoStandard(person1);
+        return person1;
     }
 
     @Override
-    public PersonDto updateParam(Long id, String name, String city) {
-        Person person = personMapper.toModelStandard(getPersonById(id));
+    public Person updateParam(Long id, String name, String city) {
+        Person person = getPersonById(id);
         if(!Objects.equals(name,"")){
             person.setName(name);
         }
         if(!Objects.equals(city, "")){
             person.setCity(city);
         }
-        return personMapper.toDtoStandard(personRepository.save(person));
+        return personRepository.save(person);
     }
 }

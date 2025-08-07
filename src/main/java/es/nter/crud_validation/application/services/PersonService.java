@@ -1,16 +1,22 @@
 package es.nter.crud_validation.application.services;
 
+import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.presentation.dto.PersonDto;
+
+import java.util.List;
 
 
 public interface PersonService {
 
-    PersonDto getPersonById(Long id);
-    PersonDto getPersonByName(String name);
-    PersonDto addPerson(PersonDto person);
-    PersonDto deletePersonById(Long id);
-    Iterable<PersonDto> getAllPerson(int pageNumber, int pageSize);
-    PersonDto updatePerson(PersonDto person);
+    List<Person> getAllPerson(int pageNumber, int pageSize);
+    Person getPersonById(Long id);
+    Person getPersonByName(String name);
 
-    PersonDto updateParam(Long id, String name, String city);
+    Person addPerson(Person person);
+
+    Person updatePerson(Person person);
+    Person updateParam(Long id, String name, String city);
+
+    Person deletePersonById(Long id);
+
 }
