@@ -96,6 +96,6 @@ public class PersonServiceImpl implements PersonService {
         if(!Objects.equals(city, "")){
             person.setCity(city);
         }
-        return personMapper.toDtoStandard(personRepository.update(person));
+        return personMapper.toDtoStandard(personRepository.save(person));
     }
 }
