@@ -1,5 +1,7 @@
 package es.nter.crud_validation.presentation.dto.person;
 
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
 import lombok.*;
 
 import java.util.Date;
@@ -16,4 +18,8 @@ public class PersonOutDtoMini {
     private Boolean active;
     private Date createdDate;
     private String imageUrl;
+
+    private StudentOutDtoMini studentOutDtoMini;
+
+    private TeacherOutDtoMini teacherOutDtoMini;
 }
