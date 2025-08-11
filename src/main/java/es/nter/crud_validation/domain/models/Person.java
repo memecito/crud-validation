@@ -31,4 +31,12 @@ public class Person {
     private Timestamp createdDate;
     private String imageUrl;
     private Timestamp terminationDate;
+
+    @OneToOne
+    private Student student;
+
+    @OneToOne
+    private Teacher teacher;
+
+
 }

@@ -1,22 +1,15 @@
-package es.nter.crud_validation.presentation.dto;
+package es.nter.crud_validation.presentation.dto.person;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PersonDto {
-
-    private Long id;
+@Getter
+@Setter
+public class PersonInputDto {
 
     @Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
     @NotBlank(message = "Usuario obligatorio")
@@ -37,5 +30,6 @@ public class PersonDto {
     private Date createdDate;
 
     private String imageUrl;
+
     private Date terminationDate;
 }

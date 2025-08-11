@@ -1,9 +1,9 @@
 package es.nter.crud_validation.application.mappers;
 
 import es.nter.crud_validation.domain.models.Person;
-import es.nter.crud_validation.presentation.dto.PersonDto;
-import es.nter.crud_validation.presentation.dto.PersonInputDto;
-import es.nter.crud_validation.presentation.dto.PersonOutDtoMini;
+import es.nter.crud_validation.presentation.dto.person.PersonDto;
+import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
+import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

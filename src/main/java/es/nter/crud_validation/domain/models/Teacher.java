@@ -22,4 +22,11 @@ public class Teacher {
     private Long id;
     private String comments;
     private String branch;
+
+    /*
+    @OneToOne
+    @JoinColumn(name="person_id", referencedColumnName = "id")
+    private Person person;
+
+     */
 }
