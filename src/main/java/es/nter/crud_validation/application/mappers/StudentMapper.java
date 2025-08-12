@@ -4,11 +4,14 @@ import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.presentation.dto.student.StudentInputDto;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+import org.springframework.context.annotation.Lazy;
 
-@Mapper(componentModel = "spring", uses = {PersonMapper.class})
+@Mapper(componentModel = "spring")
 public interface StudentMapper {
 
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
@@ -19,4 +22,6 @@ public interface StudentMapper {
     StudentOutDtoMini toDtoMini(Student student);
 
     Student toModel(StudentInputDto studentInputDto);
+
+    Student update(@MappingTarget Student target, Student source);
 }

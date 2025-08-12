@@ -3,13 +3,12 @@ package es.nter.crud_validation.presentation.controllers;
 import es.nter.crud_validation.application.mappers.StudentMapper;
 import es.nter.crud_validation.application.services.StudentService;
 import es.nter.crud_validation.domain.models.Student;
+import es.nter.crud_validation.presentation.dto.student.StudentInputDto;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,4 +33,24 @@ public class StudentController {
                        .stream().map(studentMapper::toDtoMini)
                        .collect(Collectors.toList()));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentOutDtoFull> getStudentId(Long id){
+        return ResponseEntity.ok(
+                studentMapper.toDtoFull(
+                studentService.getStudentById(id)));
+    }
+
+    @PostMapping
+    public ResponseEntity<StudentOutDtoFull> addStudent(StudentInputDto studentInputDto){
+        return ResponseEntity.ok(
+                studentMapper.toDtoFull(
+                        studentService.addStudent(
+                                studentMapper.toModel(studentInputDto)
+                        )
+                )
+        );
+    }
+
+
 }

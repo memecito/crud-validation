@@ -4,7 +4,6 @@ import es.nter.crud_validation.application.mappers.PersonMapper;
 import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.error.EntityNotFoundException;
-import es.nter.crud_validation.error.PersonNameException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +38,7 @@ public class PersonServiceImpl implements PersonService {
     public Person getPersonById(Long id) {
         return personRepository.findById(id)
                 .orElseThrow(
-                        () -> new EntityNotFoundException(id));
+                        () -> new EntityNotFoundException("persona",id));
     }
 
     @Override

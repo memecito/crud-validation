@@ -37,7 +37,6 @@ public class PersonController {
     public ResponseEntity<List<PersonOutDtoMini>> getAllPerson(
             @RequestParam (defaultValue = "0", required = false) int pageNumber,
             @RequestParam (defaultValue = "5", required = false) int pageSize){
-        //List<Person> list = personService.getAllPerson(pageNumber, pageSize);
         return ResponseEntity.ok(
                 personService.getAllPerson(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
