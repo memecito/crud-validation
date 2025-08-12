@@ -30,6 +30,5 @@ public class PersonInputDto {
     private Date createdDate;
 
     private String imageUrl;
-
     private Date terminationDate;
 }

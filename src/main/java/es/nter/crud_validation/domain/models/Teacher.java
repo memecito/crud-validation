@@ -1,10 +1,13 @@
 package es.nter.crud_validation.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,10 +26,12 @@ public class Teacher {
     private String comments;
     private String branch;
 
-    /*
-    @OneToOne
-    @JoinColumn(name="person_id", referencedColumnName = "id")
+    @JsonBackReference
+    @OneToOne (mappedBy = "teacher")
     private Person person;
 
-     */
+    @JsonBackReference
+    @OneToMany(mappedBy = "teacherStudent")
+    private List<Student> studentList;
+
 }

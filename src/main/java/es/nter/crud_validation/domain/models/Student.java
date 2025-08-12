@@ -1,5 +1,7 @@
 package es.nter.crud_validation.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,19 +31,16 @@ public class Student {
     private Branch branch;
 
     //RELACIONES
-    /*
-    @OneToOne
-    @JoinColumn(name="person", referencedColumnName = "id")
+    @JsonBackReference
+    @OneToOne(mappedBy = "student")
     private Person person;
-    */
 
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="id_teacher", referencedColumnName = "id")
-    private Teacher teacher;
+    private Teacher teacherStudent;
 
-    @ManyToMany(mappedBy = "studentList")
-    List<Subject> subjectList;
 
 
 

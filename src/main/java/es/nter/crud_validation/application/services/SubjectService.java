@@ -1,6 +1,7 @@
 package es.nter.crud_validation.application.services;
 
 import es.nter.crud_validation.domain.models.Subject;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

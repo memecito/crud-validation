@@ -30,6 +30,7 @@ public class Subject {
 
     private Timestamp finishDate;
 
+
     @ManyToMany
     @JoinTable(name = "student_subject",
         joinColumns = @JoinColumn(name="subject_id"),

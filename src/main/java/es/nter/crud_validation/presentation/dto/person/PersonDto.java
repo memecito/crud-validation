@@ -1,5 +1,8 @@
 package es.nter.crud_validation.presentation.dto.person;
 
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -36,4 +39,8 @@ public class PersonDto {
 
     private String imageUrl;
     private Date terminationDate;
+
+    private StudentOutDtoOnly studentOutDtoOnly;
+
+    private TeacherOutDtoOnly teacherOutDtoOnly;
 }
