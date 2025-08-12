@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentOutDtoMini {
+    private long id;
     private int numHoursWeek;
     private String comments;
     private enum branch {Front, Back, FullStack};
