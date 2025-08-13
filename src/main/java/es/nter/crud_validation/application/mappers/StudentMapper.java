@@ -4,12 +4,13 @@ import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.presentation.dto.student.StudentInputDto;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
-import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import org.springframework.context.annotation.Lazy;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
@@ -18,9 +19,14 @@ public interface StudentMapper {
 
     StudentOutDtoFull toDtoFull(Student student);
 
-    @Mapping(target = "personOutDtoMini", source = "person")
+    @Mappings({
+            @Mapping(target = "personOutDtoMini", source = "person"),
+            @Mapping(target = "teacherOutDtoMini", source = "teacherStudent")
+    })
     StudentOutDtoMini toDtoMini(Student student);
 
+
+    List<StudentOutDtoMini> toDtoListMini(List<Student> studentList);
     Student toModel(StudentInputDto studentInputDto);
 
     Student update(@MappingTarget Student target, Student source);

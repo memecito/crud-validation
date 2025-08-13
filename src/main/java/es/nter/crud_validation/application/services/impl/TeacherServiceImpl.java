@@ -23,7 +23,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher getTeacherById(long id) {
+    public Teacher getTeacherById(Long id) {
         return teacherRepository.findById(id)
                 .orElseThrow(
                         ()->new EntityNotFoundException("profesor",id)
@@ -36,12 +36,12 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher updateTeacher(long id, Teacher teacher) {
+    public Teacher updateTeacher(Long id, Teacher teacher) {
         return null;
     }
 
     @Override
-    public void deleteTeacher(long id) {
+    public void deleteTeacher(Long id) {
 
     }
 }

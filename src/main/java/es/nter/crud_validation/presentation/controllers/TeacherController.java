@@ -2,13 +2,14 @@ package es.nter.crud_validation.presentation.controllers;
 
 import es.nter.crud_validation.application.mappers.TeacherMapper;
 import es.nter.crud_validation.application.services.TeacherService;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherInputDto;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoFull;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,43 @@ public class TeacherController {
                             .stream().map(teacherMapper::toDtoMini)
                             .collect(Collectors.toList())
             );
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<TeacherOutDtoFull> getTeacherById(
+                @PathVariable Long id){
+            return ResponseEntity.ok(teacherMapper.toDtoFull(teacherService.getTeacherById(id)));
+        }
+
+        @PostMapping
+        public ResponseEntity<TeacherOutDtoFull> createTeacher(
+                @Valid @RequestBody TeacherInputDto teacherInputDto){
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    teacherMapper.toDtoFull(
+                            teacherService.addTeacher(
+                                    teacherMapper.toModel(teacherInputDto)
+                            )
+                    )
+            );
+        }
+
+        @PutMapping("/{id}")
+        public ResponseEntity<TeacherOutDtoMini> updateTeacher(
+                @PathVariable long id,
+                @RequestBody TeacherInputDto teacherInputDto){
+            return ResponseEntity.ok(
+                    teacherMapper.toDtoMini(
+                            teacherService.updateTeacher(
+                                    id, teacherMapper.toModel(teacherInputDto)
+                            )
+                    )
+            );
+        }
+
+        @DeleteMapping("/id")
+        public ResponseEntity deleteTeacher(@PathVariable long id){
+            teacherService.deleteTeacher(id);
+            return ResponseEntity.ok().build();
         }
 
 }

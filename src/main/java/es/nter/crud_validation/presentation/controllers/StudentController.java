@@ -33,6 +33,15 @@ public class StudentController {
                        .stream().map(studentMapper::toDtoMini)
                        .collect(Collectors.toList()));
     }
+    @GetMapping("/2")
+    public ResponseEntity<List<Student>> getAllStudent2(
+            @RequestParam (defaultValue = "0", required = false) int pageNumber,
+            @RequestParam (defaultValue = "5", required = false) int pageSize) {
+
+        return ResponseEntity.ok(
+                studentService.getAllStudent(pageNumber, pageSize)
+                        );
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentOutDtoFull> getStudentId(Long id){
