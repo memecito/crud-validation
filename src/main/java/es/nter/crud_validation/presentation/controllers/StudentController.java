@@ -6,6 +6,7 @@ import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.presentation.dto.student.StudentInputDto;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class StudentController {
                        .stream().map(studentMapper::toDtoMini)
                        .collect(Collectors.toList()));
     }
-    @GetMapping("/2")
-    public ResponseEntity<List<Student>> getAllStudent2(
+    @GetMapping("/sindto")
+    public ResponseEntity<List<Student>> getAllStudentSinDto(
             @RequestParam (defaultValue = "0", required = false) int pageNumber,
             @RequestParam (defaultValue = "5", required = false) int pageSize) {
 
@@ -44,10 +45,18 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentOutDtoFull> getStudentId(Long id){
-        return ResponseEntity.ok(
-                studentMapper.toDtoFull(
-                studentService.getStudentById(id)));
+    public ResponseEntity<?> getStudentId(
+            @PathVariable Long id,
+            @RequestParam (defaultValue = "simple",required = false) String ouputType){
+        return switch (ouputType) {
+            case "full" -> ResponseEntity.ok(
+                    studentMapper.toDtoFull(
+                            studentService.getStudentById(id)));
+            case "simple" -> ResponseEntity.ok(
+                    studentMapper.toDtoOnly(
+                            studentService.getStudentById(id)));
+            default -> throw new IllegalStateException("Unexpected value: " + ouputType);
+        };
     }
 
     @PostMapping

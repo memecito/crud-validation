@@ -1,0 +1,7 @@
+EXPLICACION DE CAMPOS:
+    Person.studentOrTeacher: creamos este campo para determinar de una forma logica si es un tipo u otro
+        tambien podemos crearlo con un Enum, sin embargo establecemos esto para facilitar
+
+Dto Inputs student y teacher:
+    para crear un student y un teacher nuevo seria mejor solo enviar el id de person?
+    por ahora recogemos el objeto integro

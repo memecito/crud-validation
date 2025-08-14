@@ -1,9 +1,7 @@
 package es.nter.crud_validation.application.mappers;
 
 import es.nter.crud_validation.domain.models.Person;
-import es.nter.crud_validation.presentation.dto.person.PersonDto;
-import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
-import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
+import es.nter.crud_validation.presentation.dto.person.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -14,14 +12,18 @@ import org.mapstruct.factory.Mappers;
 public interface PersonMapper {
 
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
+    //INPUTS
+    Person toModelStandard(PersonInputDto personInputDto);
 
-
-    @Mapping(target = "studentOutDtoOnly",source = "student")
+    //OUPUTS
+    //@Mapping(target = "studentOutDtoOnly",source = "student")
     PersonDto toDtoStandard(Person person);
     PersonOutDtoMini toDtoMini(Person person);
 
-    Person toModelStandard(PersonInputDto personInputDto);
-
+    @Mapping(target = "studentOutDtoMini",source = "student")
+    PersonOutDtoStudent toDtoStudent(Person person);
+    @Mapping(target = "teacherOutDtoMini",source = "teacher")
+    PersonOutDtoTeacher toDtoTeacher(Person person);
     Person update(@MappingTarget Person target, Person source);
 
 }

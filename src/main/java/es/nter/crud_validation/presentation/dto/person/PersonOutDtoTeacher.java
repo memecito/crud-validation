@@ -1,20 +1,19 @@
 package es.nter.crud_validation.presentation.dto.person;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonDtoFull {
-    private Long id;
+public class PersonOutDtoTeacher {
 
+    private Long id;
 
     private String username;
     private String name;
@@ -26,4 +25,6 @@ public class PersonDtoFull {
     private String imageUrl;
     private Date terminationDate;
 
+    private TeacherOutDtoOnly teacherOutDtoOnly;
+    private TeacherOutDtoMini teacherOutDtoMini;
 }

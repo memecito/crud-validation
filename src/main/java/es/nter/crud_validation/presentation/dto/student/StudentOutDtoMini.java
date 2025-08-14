@@ -4,10 +4,14 @@ import es.nter.crud_validation.application.mappers.PersonMapper;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
+import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoMini;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
+import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +21,11 @@ public class StudentOutDtoMini {
     private int numHoursWeek;
     private String comments;
     private enum branch {Front, Back, FullStack};
-    private PersonOutDtoMini personOutDtoMini;
-    private TeacherOutDtoMini teacherOutDtoMini;
+
+    private TeacherOutDtoOnly teacherOutDtoOnly;
+    private List<SubjectOutDtoMini> subjectOutDtoMiniList;
+
+
 
 
 }

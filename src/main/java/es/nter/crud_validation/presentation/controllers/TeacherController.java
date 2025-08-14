@@ -2,6 +2,7 @@ package es.nter.crud_validation.presentation.controllers;
 
 import es.nter.crud_validation.application.mappers.TeacherMapper;
 import es.nter.crud_validation.application.services.TeacherService;
+import es.nter.crud_validation.domain.models.Teacher;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherInputDto;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoFull;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
@@ -32,6 +33,15 @@ public class TeacherController {
                             .collect(Collectors.toList())
             );
         }
+
+    @GetMapping("/sindto")
+    public ResponseEntity<List<Teacher>> getAllTeacherSinDto(
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam (defaultValue = "5", required = false) int pageSize){
+        return ResponseEntity.ok(
+                teacherService.getAllTeacher(pageNumber, pageSize)
+        );
+    }
 
         @GetMapping("/{id}")
         public ResponseEntity<TeacherOutDtoFull> getTeacherById(

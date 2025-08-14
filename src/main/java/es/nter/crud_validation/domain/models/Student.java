@@ -41,6 +41,13 @@ public class Student {
     @JoinColumn(name="id_teacher", referencedColumnName = "id")
     private Teacher teacherStudent;
 
+    @ManyToMany
+    @JoinTable(name = "student_subject",
+            joinColumns =  @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name="subject_id"))
+
+    private List<Subject> subjectList;
+
 
 
 

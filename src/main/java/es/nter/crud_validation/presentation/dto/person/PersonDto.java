@@ -40,7 +40,9 @@ public class PersonDto {
     private String imageUrl;
     private Date terminationDate;
 
-    private StudentOutDtoOnly studentOutDtoOnly;
 
-    private TeacherOutDtoOnly teacherOutDtoOnly;
+
+    //private StudentOutDtoOnly studentOutDtoOnly;
+
+    //private TeacherOutDtoOnly teacherOutDtoOnly;
 }

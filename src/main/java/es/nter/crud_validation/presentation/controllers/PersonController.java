@@ -1,6 +1,7 @@
 package es.nter.crud_validation.presentation.controllers;
 
 import es.nter.crud_validation.application.services.PersonService;
+import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
@@ -32,6 +33,14 @@ public class PersonController {
                         .stream().map(personMapper::toDtoMini)
                         .collect(Collectors.toList())) ;
     }
+    @GetMapping("/sindto")
+    public ResponseEntity<List<Person>> getAllPersonSinDto(
+            @RequestParam (defaultValue = "0", required = false) int pageNumber,
+            @RequestParam (defaultValue = "5", required = false) int pageSize){
+        return ResponseEntity.ok(
+                personService.getAllPersonActive(pageNumber,pageSize)
+                        ) ;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonOutDtoMini>> getAllPerson(
@@ -44,13 +53,20 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonDto> getPersonById(@PathVariable Long id){
+    public ResponseEntity<?> getPersonById(@PathVariable Long id){
+        Person person= personService.getPersonById(id);
+        /*
         PersonDto personDto= personMapper.toDtoStandard(personService.getPersonById(id));
         if (personDto==null) {
             return ResponseEntity.notFound().build();
         }else {
             return ResponseEntity.ok(personDto);
-        }
+        }*/
+        return switch (person.getRol()){
+            case STUDENT-> ResponseEntity.ok(personMapper.toDtoStudent(person));
+            case TEACHER-> ResponseEntity.ok(personMapper.toDtoTeacher(person));
+            default -> ResponseEntity.ok(personMapper.toDtoStandard(person));
+        };
     }
 
     @GetMapping("/name")

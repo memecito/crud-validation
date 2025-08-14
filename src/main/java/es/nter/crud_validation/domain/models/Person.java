@@ -33,6 +33,9 @@ public class Person {
     private String imageUrl;
     private Timestamp terminationDate;
 
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id", referencedColumnName = "id")

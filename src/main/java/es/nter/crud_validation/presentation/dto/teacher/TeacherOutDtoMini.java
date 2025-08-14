@@ -15,7 +15,6 @@ public class TeacherOutDtoMini {
     private Long id;
     private String comments;
     private String branch;
-    private PersonOutDtoMini personMini;
     private List<StudentOutDtoMini> studentOutDtoMiniList;
 
 

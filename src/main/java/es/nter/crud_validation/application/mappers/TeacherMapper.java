@@ -23,15 +23,13 @@ public interface TeacherMapper {
 
     Teacher update(@MappingTarget Teacher target, Teacher source);
 
-    @Mappings({
-            @Mapping(target = "personMini", source = "person"),
-            @Mapping(target = "studentOutDtoMiniList", source = "studentList")
-    })
+
+    @Mapping(target = "studentOutDtoMiniList", source = "studentList")
     TeacherOutDtoMini toDtoMini(Teacher teacher);
 
     @Mappings({
             @Mapping(target = "personMini", source = "person"),
-            @Mapping(target = "studentOutDtoMiniList", source = "studentList")
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")
     })
     TeacherOutDtoFull toDtoFull(Teacher teacher);
     List<TeacherOutDtoMini> listToDtoMini(List<Teacher> teacherList);

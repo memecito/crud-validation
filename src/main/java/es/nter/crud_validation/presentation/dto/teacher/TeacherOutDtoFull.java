@@ -2,6 +2,7 @@ package es.nter.crud_validation.presentation.dto.teacher;
 
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,6 @@ public class TeacherOutDtoFull {
     private String comments;
     private String branch;
     private PersonOutDtoMini personMini;
-    private List<StudentOutDtoMini> studentOutDtoMiniList;
+    private List<StudentOutDtoOnly> studentOutDtoOnlyList;
 
 }

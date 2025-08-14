@@ -1,6 +1,5 @@
 package es.nter.crud_validation.presentation.dto.subject;
 
-import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +11,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectOutDtoMini {
+public class SubjectOutDtoOnly {
     private Long id;
     private String comments;
     private Timestamp initialDate;
     private Timestamp finishDate;
-
-    private List<StudentOutDtoOnly> studentListOnly;
-
 }
