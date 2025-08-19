@@ -1,10 +1,7 @@
 package es.nter.crud_validation.application.mappers;
 
 import es.nter.crud_validation.domain.models.Teacher;
-import es.nter.crud_validation.presentation.dto.teacher.TeacherInputDto;
-import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoFull;
-import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
-import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
+import es.nter.crud_validation.presentation.dto.teacher.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -18,19 +15,33 @@ public interface TeacherMapper {
 
     TeacherMapper INSTANCE = Mappers.getMapper(TeacherMapper.class);
 
-    TeacherOutDtoOnly toDtoOnly(Teacher teacher);
+    // INPUTS DTO
+    @Mapping(target = "person", source = "personInputDtoId")
     Teacher toModel(TeacherInputDto teacherInputDto);
 
     Teacher update(@MappingTarget Teacher target, Teacher source);
 
+    //OUPUTS DTO
+    TeacherOutDtoOnly toDtoOnly(Teacher teacher);
 
-    @Mapping(target = "studentOutDtoMiniList", source = "studentList")
+    @Mappings({
+            @Mapping(target = "personOutDtoMini", source="person"),
+            @Mapping(target = "studentOutDtoSubjectsList", source = "studentList")})
     TeacherOutDtoMini toDtoMini(Teacher teacher);
 
     @Mappings({
-            @Mapping(target = "personMini", source = "person"),
-            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")
-    })
+            @Mapping(target="personDto", source="person"),
+            @Mapping(target = "studentOutDtoMiniList", source = "studentList")})
+    TeacherOutDtoPerson toDtoPerson(Teacher teacher);
+
+    @Mappings({
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
+    TeacherOutDtoStudents toDtoStudents(Teacher teacher);
+
+    @Mappings({
+            @Mapping(target = "personDtoFull", source = "person"),
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
     TeacherOutDtoFull toDtoFull(Teacher teacher);
+
     List<TeacherOutDtoMini> listToDtoMini(List<Teacher> teacherList);
 }

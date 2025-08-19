@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SubjectOutDtoOnly {
     private Long id;
+    private String subject;
     private String comments;
     private Timestamp initialDate;
     private Timestamp finishDate;

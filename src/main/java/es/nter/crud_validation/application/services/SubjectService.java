@@ -10,7 +10,7 @@ public interface SubjectService {
     List<Subject> getAllSubject(int pageNumber, int pageSize);
     Subject getSubjectById( long id);
     List<Subject> getSubjectByStudentId( long id);
-    Subject addSubject( Subject subject);
+    List<Subject> addSubject( List<Subject> subjectList);
     Subject updateSubject(long id, Subject subject);
     void deleteSubject(long id);
 }

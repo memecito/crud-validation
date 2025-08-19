@@ -1,7 +1,9 @@
 package es.nter.crud_validation.application.services.impl;
 
+import es.nter.crud_validation.application.mappers.SubjectMapper;
 import es.nter.crud_validation.application.services.SubjectService;
 import es.nter.crud_validation.domain.models.Subject;
+import es.nter.crud_validation.error.DeleteSubjectException;
 import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.SubjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +17,18 @@ import java.util.List;
 public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
+    private final SubjectMapper subjectMapper;
 
     @Override
     public List<Subject> getAllSubject(int pageNumber, int pageSize) {
+
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         return subjectRepository.findAll(pageRequest).getContent().stream().toList();
     }
 
     @Override
     public Subject getSubjectById(long id) {
+
         return subjectRepository.findById(id).orElseThrow(
                 ()-> new EntityNotFoundException("subject", id)
         );
@@ -31,21 +36,31 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getSubjectByStudentId(long id){
+
         return Collections.singletonList(subjectRepository.findByStudentList_Id(id));
     }
 
     @Override
-    public Subject addSubject(Subject subject) {
-        return null;
+    public List<Subject> addSubject(List<Subject> subjectList) {
+
+        return subjectRepository.saveAll(subjectList);
     }
 
     @Override
     public Subject updateSubject(long id, Subject subject) {
-        return null;
+
+        return subjectMapper.update(getSubjectById(id),subject);
     }
 
     @Override
     public void deleteSubject(long id) {
 
+       if(getSubjectById(id).getStudentList().isEmpty())
+       {
+           subjectRepository.deleteById(id);
+       }else{
+           throw  new DeleteSubjectException("Esta asignatura esta siendo cursada");
+
+       }
     }
 }

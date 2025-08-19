@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RestControllerAdvice
 public class UnprocessableEntityException {
@@ -74,6 +73,47 @@ public class UnprocessableEntityException {
                 ex.getMessage()
         );
         return new ResponseEntity<>(customError,HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    @ExceptionHandler(value = {StudentCreatedException.class})
+    public ResponseEntity<CustomError> handleStudentCreatedEntity(StudentCreatedException ex){
+        CustomError customError= new CustomError(
+                HttpStatus.CONFLICT.value(),
+                "No se pueden asignar dos roles",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = {TeacherCreatedException.class})
+    public ResponseEntity<CustomError> handleTeacherCreatedEntity(TeacherCreatedException ex){
+        CustomError customError= new CustomError(
+                HttpStatus.CONFLICT.value(),
+                "No se pueden asignar dos roles",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(DeletePersonException.class)
+    public ResponseEntity<CustomError> handleDeletePerson(DeletePersonException ex){
+        CustomError customError= new CustomError(
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "Persona asociada a un rol",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError,HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(DeleteSubjectException.class)
+    public ResponseEntity<CustomError> handleDleteSubject(DeleteSubjectException ex){
+        CustomError customError= new CustomError(
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "Que no se puede, no te enteras...",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError,HttpStatus.UNPROCESSABLE_ENTITY);
+
     }
 
 

@@ -8,29 +8,28 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
+
 @Getter
 @Setter
-public class PersonInputDto {
-    @Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
-    @NotBlank(message = "Usuario obligatorio")
+public class PersonInputDtoId {
+    private Long id;
+    //@Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
+    //@NotBlank(message = "Usuario obligatorio")
     private String username;
-    @NotBlank(message = "Contraseña obligatorio")
-    @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 y 20 caracteres.")
-    private String password;
-    @NotBlank(message = "Nombre obligatorio")
+    //@NotBlank(message = "Nombre obligatorio")
     private String name;
 
     private String surname;
 
     private String personalEmail;
 
-    @NotBlank(message = "Email obligatorio")
+    //@NotBlank(message = "Email obligatorio")
     private String companyEmail;
-    @NotBlank(message = "Ciudad obligatorio")
+    //@NotBlank(message = "Ciudad obligatorio")
     private String city;
-    @NotNull(message = "Estado obligatorio")
+    //@NotNull(message = "Estado obligatorio")
     private Boolean active;
-    @NotNull(message = "Fecha de creacion obligatorio")
+    //@NotNull(message = "Fecha de creacion obligatorio")
     private Date createdDate;
 
     private String imageUrl;

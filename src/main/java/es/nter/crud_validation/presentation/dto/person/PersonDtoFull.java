@@ -1,5 +1,6 @@
 package es.nter.crud_validation.presentation.dto.person;
 
+import es.nter.crud_validation.domain.models.Rol;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,11 @@ public class PersonDtoFull {
     private String username;
     private String name;
     private String surname;
+    private String personalEmail;
+
     private String companyEmail;
+    private Rol rol;
+
     private String city;
     private Boolean active;
     private Date createdDate;

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,20 +19,26 @@ import java.util.List;
 @Table(name = "teacher")
 public class Teacher {
 
-    //OnetoOne con person
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String comments;
     private String branch;
 
+    //RELACIONES
     @JsonBackReference
     @OneToOne (mappedBy = "teacher")
     private Person person;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "teacherStudent")
-    private List<Student> studentList;
+    @OneToMany(
+            mappedBy = "teacherStudent",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Student> studentList= new ArrayList<>();
+
+    //METODOS
+    public void addPerson(Person person){
+        this.person= person;
+    }
 
 }

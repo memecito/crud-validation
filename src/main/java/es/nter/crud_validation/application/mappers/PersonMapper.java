@@ -12,18 +12,22 @@ import org.mapstruct.factory.Mappers;
 public interface PersonMapper {
 
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
+
     //INPUTS
     Person toModelStandard(PersonInputDto personInputDto);
+    Person toModelId(PersonInputDtoId personInputDtoId);
+
+    Person update(@MappingTarget Person target, Person source);
+
 
     //OUPUTS
-    //@Mapping(target = "studentOutDtoOnly",source = "student")
     PersonDto toDtoStandard(Person person);
     PersonOutDtoMini toDtoMini(Person person);
 
-    @Mapping(target = "studentOutDtoMini",source = "student")
+    @Mapping(target = "studentOutDtoTeacherSubjects",source = "student")
     PersonOutDtoStudent toDtoStudent(Person person);
-    @Mapping(target = "teacherOutDtoMini",source = "teacher")
+
+    @Mapping(target="teacherOutDtoStudents", source = "teacher")
     PersonOutDtoTeacher toDtoTeacher(Person person);
-    Person update(@MappingTarget Person target, Person source);
 
 }

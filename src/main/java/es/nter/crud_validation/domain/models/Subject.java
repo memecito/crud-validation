@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,24 +19,18 @@ import java.util.List;
 @Table(name="subject")
 public class Subject {
 
-    //ManyToMany con student
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String subject;
-
     private String comments;
-
+    @Column(nullable = false)
     private Timestamp initialDate;
-
     private Timestamp finishDate;
 
-
-    @ManyToMany
-    @JoinTable(name = "student_subject",
-        joinColumns = @JoinColumn(name="subject_id"),
-        inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<Student> studentList;
+    //RELACIONES
+    @ManyToMany(mappedBy = "subjectList", fetch = FetchType.LAZY)
+    private List<Student> studentList= new ArrayList<>();
 
 
 

@@ -1,9 +1,7 @@
 package es.nter.crud_validation.presentation.dto.teacher;
 
-import es.nter.crud_validation.presentation.dto.person.PersonDtoFull;
-import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
+import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
-import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +11,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeacherOutDtoFull {
+public class TeacherOutDtoPerson {
+
+    private PersonDto personDto;
 
     private Long id;
     private String comments;
     private String branch;
 
-    private PersonDtoFull personDtoFull;
-
-    private List<StudentOutDtoOnly> studentOutDtoOnlyList;
-
+    private List<StudentOutDtoMini> studentOutDtoMiniList;
 }

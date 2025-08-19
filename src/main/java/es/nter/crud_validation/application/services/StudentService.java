@@ -1,6 +1,7 @@
 package es.nter.crud_validation.application.services;
 
 import es.nter.crud_validation.domain.models.Student;
+import es.nter.crud_validation.domain.models.Subject;
 
 import java.util.List;
 
@@ -12,7 +13,11 @@ public interface StudentService {
 
     Student addStudent( Student student);
 
+    Student addSubjects(long id, List<Subject> subjectList);
+
     Student updateStudent(long id, Student student);
 
     void deleteStudent(long id);
+
+    Student deleteSubjects(long id, List<Subject> subjectList);
 }

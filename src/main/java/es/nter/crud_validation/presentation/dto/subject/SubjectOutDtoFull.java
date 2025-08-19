@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SubjectOutDtoFull {
     private Long id;
+    private String subject;
     private String comments;
     private Timestamp initialDate;
     private Timestamp finishDate;

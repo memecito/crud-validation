@@ -1,5 +1,6 @@
 package es.nter.crud_validation.presentation.dto.person;
 
+import es.nter.crud_validation.domain.models.Rol;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
@@ -18,31 +19,18 @@ import java.util.Date;
 public class PersonDto {
 
     private Long id;
-
-    @Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
-    @NotBlank(message = "Usuario obligatorio")
     private String username;
-    @NotBlank(message = "Contraseña obligatorio")
     private String password;
-    @NotBlank(message = "Nombre obligatorio")
     private String name;
-
     private String surname;
-    @NotBlank(message = "Email obligatorio")
-    private String companyEmail;
-    @NotBlank(message = "Ciudad obligatorio")
-    private String city;
-    @NotNull(message = "Estado obligatorio")
-    private Boolean active;
-    @NotNull(message = "Fecha de creacion obligatorio")
-    private Date createdDate;
+    private String personalEmail;
 
+    private String companyEmail;
+    private Rol rol;
+    private String city;
+    private Boolean active;
+    private Date createdDate;
     private String imageUrl;
     private Date terminationDate;
 
-
-
-    //private StudentOutDtoOnly studentOutDtoOnly;
-
-    //private TeacherOutDtoOnly teacherOutDtoOnly;
 }

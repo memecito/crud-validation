@@ -1,10 +1,12 @@
 package es.nter.crud_validation.presentation.dto.student;
 
 import es.nter.crud_validation.application.mappers.PersonMapper;
+import es.nter.crud_validation.domain.models.Branch;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoMini;
+import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoOnly;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
 import lombok.AllArgsConstructor;
@@ -20,10 +22,11 @@ public class StudentOutDtoMini {
     private long id;
     private int numHoursWeek;
     private String comments;
-    private enum branch {Front, Back, FullStack};
+    private Branch branch;
 
+    private PersonOutDtoMini personOutDtoMini;
     private TeacherOutDtoOnly teacherOutDtoOnly;
-    private List<SubjectOutDtoMini> subjectOutDtoMiniList;
+    private List<SubjectOutDtoOnly> subjectOutDtoOnlyList;
 
 
 

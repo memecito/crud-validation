@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectInputDto {
+public class SubjectInputDtoId {
+    private Long id;
 
     private String subject;
     private String comments;

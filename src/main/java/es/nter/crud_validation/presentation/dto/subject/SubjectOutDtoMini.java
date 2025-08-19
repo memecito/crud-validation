@@ -14,9 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class SubjectOutDtoMini {
     private Long id;
-    private String comments;
+    private String subject;
     private Timestamp initialDate;
-    private Timestamp finishDate;
 
     private List<StudentOutDtoOnly> studentListOnly;
 
