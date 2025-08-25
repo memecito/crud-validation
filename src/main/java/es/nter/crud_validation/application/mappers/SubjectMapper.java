@@ -29,7 +29,7 @@ public interface SubjectMapper {
     @Mapping(target ="studentListOnly", source = "studentList")
     SubjectOutDtoMini toDtoMini(Subject subject);
 
-    @Mapping(target ="studentOutDtoFullList", source = "studentList")
+    @Mapping(target ="studentOutDtoOnlyList", source = "studentList")
     SubjectOutDtoFull toDtoFull(Subject subject);
 
     List<Subject> toMOdelList (List<SubjectInputDto> subjectInputDtoList);
