@@ -5,7 +5,6 @@ import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
 import es.nter.crud_validation.error.DeletePersonException;
-import es.nter.crud_validation.error.EntityDuplicateException;
 import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

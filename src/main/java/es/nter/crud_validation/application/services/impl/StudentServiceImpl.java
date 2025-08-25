@@ -9,7 +9,6 @@ import es.nter.crud_validation.domain.models.Subject;
 import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.error.StudentCreatedException;
 import es.nter.crud_validation.infraestructure.repositories.StudentRepository;
-import es.nter.crud_validation.infraestructure.repositories.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

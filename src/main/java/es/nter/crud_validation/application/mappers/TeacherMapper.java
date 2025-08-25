@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {StudentMapper.class})
+@Mapper(componentModel = "spring",uses = {StudentMapper.class})
 public interface TeacherMapper {
 
     TeacherMapper INSTANCE = Mappers.getMapper(TeacherMapper.class);
@@ -26,21 +26,26 @@ public interface TeacherMapper {
 
     @Mappings({
             @Mapping(target = "personOutDtoMini", source="person"),
-            @Mapping(target = "studentOutDtoSubjectsList", source = "studentList")})
+            @Mapping(target = "studentOutDtoSubjectsList",
+                    source = "studentList",
+                    qualifiedByName = "studentToSubjectsDto")})
     TeacherOutDtoMini toDtoMini(Teacher teacher);
 
     @Mappings({
             @Mapping(target="personDto", source="person"),
-            @Mapping(target = "studentOutDtoMiniList", source = "studentList")})
+            @Mapping(target = "studentOutDtoMiniList", source = "studentList",
+                    qualifiedByName = "studentToDtoMini")})
     TeacherOutDtoPerson toDtoPerson(Teacher teacher);
 
     @Mappings({
-            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList",
+                    qualifiedByName = "studentToDtoOnly")})
     TeacherOutDtoStudents toDtoStudents(Teacher teacher);
 
     @Mappings({
             @Mapping(target = "personDtoFull", source = "person"),
-            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList",
+                    qualifiedByName = "studentToDtoOnly")})
     TeacherOutDtoFull toDtoFull(Teacher teacher);
 
     List<TeacherOutDtoMini> listToDtoMini(List<Teacher> teacherList);

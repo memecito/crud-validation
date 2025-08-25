@@ -27,7 +27,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> getAllTeacher(int pageNumber, int pageSize) {
         PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
-        return teacherRepository.findAll(pageRequest).getContent().stream().toList();
+        List<Teacher> teacherList=teacherRepository.findAll(pageRequest).getContent().stream().toList();
+        return teacherList;
     }
 
     @Override
