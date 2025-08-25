@@ -26,26 +26,21 @@ public interface TeacherMapper {
 
     @Mappings({
             @Mapping(target = "personOutDtoMini", source="person"),
-            @Mapping(target = "studentOutDtoSubjectsList",
-                    source = "studentList",
-                    qualifiedByName = "studentToSubjectsDto")})
+            @Mapping(target = "studentOutDtoSubjectsList", source = "studentList",qualifiedByName = "studentToSubjectsDto")})
     TeacherOutDtoMini toDtoMini(Teacher teacher);
 
     @Mappings({
             @Mapping(target="personDto", source="person"),
-            @Mapping(target = "studentOutDtoMiniList", source = "studentList",
-                    qualifiedByName = "studentToDtoMini")})
+            @Mapping(target = "studentOutDtoMiniList", source = "studentList")})
     TeacherOutDtoPerson toDtoPerson(Teacher teacher);
 
     @Mappings({
-            @Mapping(target = "studentOutDtoOnlyList", source = "studentList",
-                    qualifiedByName = "studentToDtoOnly")})
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
     TeacherOutDtoStudents toDtoStudents(Teacher teacher);
 
     @Mappings({
             @Mapping(target = "personDtoFull", source = "person"),
-            @Mapping(target = "studentOutDtoOnlyList", source = "studentList",
-                    qualifiedByName = "studentToDtoOnly")})
+            @Mapping(target = "studentOutDtoOnlyList", source = "studentList")})
     TeacherOutDtoFull toDtoFull(Teacher teacher);
 
     List<TeacherOutDtoMini> listToDtoMini(List<Teacher> teacherList);
