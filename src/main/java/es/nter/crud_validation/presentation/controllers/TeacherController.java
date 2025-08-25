@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,11 +28,12 @@ public class TeacherController {
         public ResponseEntity<List<TeacherOutDtoMini>> getAllTeacher(
                 @RequestParam(defaultValue = "0", required = false) int pageNumber,
                 @RequestParam (defaultValue = "10", required = false) int pageSize){
+            List<TeacherOutDtoMini> teacherOutDtoMiniList=
+                    teacherMapper.listToDtoMini(
+                            new ArrayList<>(teacherService.getAllTeacher(pageNumber, pageSize)));
 
             return ResponseEntity.ok(
-                    teacherService.getAllTeacher(pageNumber, pageSize)
-                            .stream().map(teacherMapper::toDtoMini)
-                            .collect(Collectors.toList())
+                    teacherOutDtoMiniList
             );
         }
 

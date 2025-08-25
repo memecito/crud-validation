@@ -15,7 +15,6 @@ public class PersonOutDtoMini {
     private Long id;
     private String username;
     private String personalEmail;
-
     private String companyEmail;
     private Rol rol;
     private Date createdDate;

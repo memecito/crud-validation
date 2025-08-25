@@ -1,0 +1,34 @@
+-- Elimina la tabla si ya existe para evitar errores al ejecutar el script múltiples veces.
+DROP TABLE IF EXISTS subject;
+
+-- Crea la tabla 'subject' con las columnas especificadas.
+CREATE TABLE subject (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    subject VARCHAR(255) NOT NULL,
+    comments VARCHAR(255),
+    initial_date TIMESTAMP,
+    finish_date TIMESTAMP
+);
+
+-- Inserta 20 registros de asignaturas de ejemplo.
+INSERT INTO subject (subject, comments, initial_date, finish_date) VALUES
+('Matemáticas I', 'Curso de cálculo diferencial y álgebra lineal.', '2024-09-09 09:00:00', '2025-06-20 11:00:00'),
+('Lengua Castellana y Literatura', 'Análisis de la literatura del Siglo de Oro y sintaxis avanzada.', '2024-09-09 11:00:00', '2025-06-20 13:00:00'),
+('Historia de España', 'Estudio del periodo contemporáneo, siglos XIX y XX.', '2024-09-09 10:00:00', '2025-06-19 12:00:00'),
+('Física y Química', 'Fundamentos de la mecánica clásica y la tabla periódica.', '2024-09-10 09:00:00', '2025-06-21 11:00:00'),
+('Biología y Geología', 'Genética mendeliana y tectónica de placas.', '2024-09-10 12:00:00', '2025-06-21 14:00:00'),
+('Inglés Avanzado', 'Preparación para el nivel C1, enfocado en conversación.', '2024-09-11 16:00:00', '2025-06-18 18:00:00'),
+('Filosofía', 'Introducción a los grandes pensadores, desde Platón a Nietzsche.', '2024-09-11 10:00:00', '2025-06-18 12:00:00'),
+('Educación Física', 'Desarrollo de deportes de equipo y condición física.', '2024-09-12 14:00:00', '2025-06-19 16:00:00'),
+('Tecnología Industrial', 'Principios de neumática, hidráulica y sistemas automáticos.', '2024-09-12 09:00:00', '2025-06-17 11:00:00'),
+('Dibujo Técnico', 'Sistemas de representación diédrico y axonométrico.', '2024-09-13 11:00:00', '2025-06-17 13:00:00'),
+('Programación en Java', 'Introducción a la Programación Orientada a Objetos.', '2025-02-03 15:00:00', '2025-06-10 17:00:00'),
+('Bases de Datos', 'Modelado de datos con SQL y diseño de esquemas relacionales.', '2025-02-03 17:00:00', '2025-06-10 19:00:00'),
+('Sistemas Operativos', 'Estudio de la gestión de procesos y memoria en sistemas Linux.', '2024-09-16 10:00:00', '2025-01-31 12:00:00'),
+('Redes de Computadoras', 'Fundamentos del modelo OSI y TCP/IP.', '2024-09-16 12:00:00', '2025-01-31 14:00:00'),
+('Economía de la Empresa', 'Análisis de balances y estrategias de marketing.', '2024-09-17 09:00:00', '2025-06-20 11:00:00'),
+('Latín I', 'Introducción a la gramática y traducción de textos sencillos.', '2024-09-17 12:00:00', '2025-06-20 14:00:00'),
+('Inteligencia Artificial', 'Conceptos básicos sobre aprendizaje automático y redes neuronales.', '2025-02-05 10:00:00', '2025-06-12 12:00:00'),
+('Historia del Arte', 'Recorrido por el Renacimiento y el Barroco europeo.', '2024-09-18 11:00:00', '2025-06-19 13:00:00'),
+('Música y Sonido Digital', 'Producción y edición de audio con software especializado.', '2024-09-19 15:00:00', '2025-06-16 17:00:00'),
+('Psicología Social', 'Estudio del comportamiento individual en contextos de grupo.', '2024-09-20 10:00:00', '2025-01-30 12:00:00');

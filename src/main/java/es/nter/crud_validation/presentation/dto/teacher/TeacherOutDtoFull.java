@@ -2,6 +2,7 @@ package es.nter.crud_validation.presentation.dto.teacher;
 
 import es.nter.crud_validation.presentation.dto.person.PersonDtoFull;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,7 @@ public class TeacherOutDtoFull {
     private PersonDtoFull personDtoFull;
 
     private List<StudentOutDtoOnly> studentOutDtoOnlyList;
+    //para borrar
+    private List<StudentOutDtoFull> studentOutDtoFullList;
 
 }
