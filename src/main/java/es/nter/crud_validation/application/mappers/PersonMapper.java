@@ -24,8 +24,7 @@ public interface PersonMapper {
     PersonDto toDtoStandard(Person person);
     PersonOutDtoMini toDtoMini(Person person);
 
-    @Mapping(target = "studentOutDtoTeacherSubjects",source = "student",
-    qualifiedByName = "studentToDtoTeacherSubjects")
+    @Mapping(target = "studentOutDtoTeacherSubjects",source = "student")
     PersonOutDtoStudent toDtoStudent(Person person);
 
     @Mapping(target="teacherOutDtoStudents", source = "teacher")

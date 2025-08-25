@@ -19,7 +19,6 @@ public interface StudentMapper {
     Student update(@MappingTarget Student target, Student source);
 
     //OUPUTS DTO
-    @Named("studentToDtoOnly")
     StudentOutDtoOnly toDtoOnly(Student studentById);
 
     @Named("studentToDtoMini")
@@ -43,7 +42,7 @@ public interface StudentMapper {
     @Mappings({
             @Mapping(target = "personDtoFull", source = "person"),
             @Mapping(target = "teacherOutDtoOnly", source = "teacherStudent"),
-            @Mapping(target = "subjectOutDtoOnlyList",source = "subjectList")})
+            @Mapping(target = "subjectOutDtoMiniList",source = "subjectList")})
     StudentOutDtoFull toDtoFull(Student student);
 
     List<StudentOutDtoMini> toDtoListMini(List<Student> studentList);

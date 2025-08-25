@@ -13,7 +13,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses={StudentMapper.class})
+@Mapper(componentModel = "spring")
 public interface SubjectMapper {
 
     SubjectMapper INSTANCE = Mappers.getMapper(SubjectMapper.class);
@@ -29,7 +29,7 @@ public interface SubjectMapper {
     @Mapping(target ="studentListOnly", source = "studentList")
     SubjectOutDtoMini toDtoMini(Subject subject);
 
-    @Mapping(target ="studentOutDtoFullList", source = "studentList", qualifiedByName = "studentToDtoFull")
+    @Mapping(target ="studentOutDtoFullList", source = "studentList")
     SubjectOutDtoFull toDtoFull(Subject subject);
 
     List<Subject> toMOdelList (List<SubjectInputDto> subjectInputDtoList);

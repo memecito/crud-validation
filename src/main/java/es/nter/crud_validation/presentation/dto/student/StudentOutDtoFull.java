@@ -3,7 +3,6 @@ package es.nter.crud_validation.presentation.dto.student;
 import es.nter.crud_validation.domain.models.Branch;
 import es.nter.crud_validation.presentation.dto.person.PersonDtoFull;
 import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoMini;
-import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoOnly;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoOnly;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +21,6 @@ public class StudentOutDtoFull {
     private Branch branch;
     private PersonDtoFull personDtoFull;
     private TeacherOutDtoOnly teacherOutDtoOnly;
-    private List<SubjectOutDtoOnly> subjectOutDtoOnlyList;
+    private List<SubjectOutDtoMini> subjectOutDtoMiniList;
 
 }
