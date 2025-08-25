@@ -23,7 +23,4 @@ public class TeacherOutDtoFull {
     private PersonDtoFull personDtoFull;
 
     private List<StudentOutDtoOnly> studentOutDtoOnlyList;
-    //para borrar
-    private List<StudentOutDtoFull> studentOutDtoFullList;
-
 }
