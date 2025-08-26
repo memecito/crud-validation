@@ -2,6 +2,8 @@ package es.nter.crud_validation.presentation.dto.subject;
 
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
+import es.nter.crud_validation.presentation.dto.student.StudentOutDtoSubjects;
 import es.nter.crud_validation.presentation.dto.teacher.TeacherOutDtoMini;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +20,6 @@ public class SubjectOutDtoFull {
     private String comments;
     private Timestamp initialDate;
     private Timestamp finishDate;
-    private TeacherOutDtoMini teacherOutDtoMini;
-    private List<StudentOutDtoFull> studentOutDtoFullList;
+
+    private List<StudentOutDtoOnly> studentOutDtoOnlyList;
 }

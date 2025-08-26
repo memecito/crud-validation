@@ -1,0 +1,63 @@
+-- Elimina la tabla si ya existe
+DROP TABLE IF EXISTS teacher;
+
+-- Crea la estructura de la tabla 'teacher'
+CREATE TABLE teacher (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL UNIQUE,
+    branch VARCHAR(50),
+    comments VARCHAR(255)
+);
+
+-- Inserta 50 registros de profesores de ejemplo
+INSERT INTO teacher (branch, comments) VALUES
+( 'Back', 'Experto en arquitectura de microservicios con Java y Spring Boot.'),
+( 'Front', 'Especialista en desarrollo de interfaces con React y TypeScript.'),
+( 'FullStack', 'Desarrollador MERN con más de 10 años de experiencia.'),
+( 'Back', 'Experto en bases de datos SQL y NoSQL, optimización de consultas.'),
+( 'Front', 'Diseñador de UX/UI con amplios conocimientos de CSS Grid y Flexbox.'),
+( 'FullStack', 'Especialista en Python con Django y React.'),
+( 'Back', 'Desarrollador backend con Node.js, Express y NestJS.'),
+( 'Front', 'Experto en Angular y desarrollo de PWAs (Progressive Web Apps).'),
+( 'FullStack', 'Apasionado por DevOps y la integración continua (CI/CD).'),
+( 'Back', 'Especialista en seguridad de aplicaciones y hacking ético.'),
+( 'Front', 'Desarrollador de aplicaciones móviles híbridas con Ionic y React Native.'),
+( 'FullStack', 'Experto en metodologías ágiles como Scrum y Kanban.'),
+( 'Back', 'Especialista en Go (Golang) para sistemas de alto rendimiento.'),
+( 'Front', 'Animación de interfaces con GSAP y librerías de JavaScript.'),
+( 'FullStack', 'Profesor con experiencia en startups y escalado de productos.'),
+( 'Back', 'Desarrollo con PHP y el ecosistema de Laravel.'),
+( 'Front', 'Maquetación accesible y compatible con todos los navegadores.'),
+( 'FullStack', 'Experiencia en la nube con AWS, Google Cloud y Azure.'),
+( 'Back', 'Especialista en la creación de APIs RESTful robustas.'),
+( 'Front', 'Desarrollo de e-commerce con Shopify y Headless CMS.'),
+( 'FullStack', 'Arquitecto de soluciones de software para grandes empresas.'),
+( 'Back', 'Experto en .NET y el ecosistema de Microsoft.'),
+( 'Front', 'Especialista en Vue.js y Nuxt.js para renderizado en servidor.'),
+( 'FullStack', 'Mentoría de perfiles junior y gestión de equipos.'),
+( 'Back', 'Desarrollo de sistemas embebidos y IoT.'),
+( 'Front', 'Conocimientos avanzados de Webpack y herramientas de build.'),
+( 'FullStack', 'Especialista en la creación de tests unitarios y de integración.'),
+( 'Back', 'Experiencia en el sector financiero y Fintech.'),
+( 'Front', 'Desarrollo de dashboards y visualización de datos con D3.js.'),
+( 'FullStack', 'Experto en C# y desarrollo de videojuegos con Unity.'),
+( 'Back', 'Especialista en Ruby on Rails.'),
+( 'Front', 'Maquetación con Tailwind CSS.'),
+( 'FullStack', 'Profesor de Clean Code y principios SOLID.'),
+( 'Back', 'Experto en Kafka y sistemas de mensajería.'),
+( 'Front', 'Especialista en Svelte y SvelteKit.'),
+( 'FullStack', 'Experiencia en la migración de sistemas monolíticos a microservicios.'),
+( 'Back', 'Desarrollo de plugins para WordPress.'),
+( 'Front', 'Experto en optimización de rendimiento web (WPO).'),
+( 'FullStack', 'Especialista en serverless y funciones en la nube.'),
+( 'Back', 'Experiencia con Elixir y Phoenix para aplicaciones en tiempo real.'),
+( 'Front', 'Desarrollo con Elm, un lenguaje funcional para el frontend.'),
+( 'FullStack', 'Profesor de algoritmos y estructuras de datos.'),
+( 'Back', 'Especialista en GraphQL para la creación de APIs.'),
+( 'Front', 'Experto en la creación de Design Systems.'),
+( 'FullStack', 'Desarrollo de aplicaciones blockchain y Web3.'),
+( 'Back', 'Experto en bases de datos de grafos como Neo4j.'),
+( 'Front', 'Especialista en Three.js y WebGL para gráficos 3D.'),
+( 'FullStack', 'Consultor tecnológico y de transformación digital.'),
+( 'Back', 'Desarrollo de aplicaciones con Rust.'),
+( 'Front', 'Experto en SEO técnico para aplicaciones web.');

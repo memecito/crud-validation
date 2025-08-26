@@ -1,0 +1,63 @@
+-- Elimina la tabla si ya existe
+DROP TABLE IF EXISTS teacher;
+
+-- Crea la estructura de la tabla 'teacher'
+CREATE TABLE teacher (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL UNIQUE,
+    branch VARCHAR(50),
+    comments VARCHAR(255)
+);
+
+-- Inserta 50 registros de profesores de ejemplo
+INSERT INTO teacher (person_id, branch, comments) VALUES
+(201, 'Back', 'Experto en arquitectura de microservicios con Java y Spring Boot.'),
+(202, 'Front', 'Especialista en desarrollo de interfaces con React y TypeScript.'),
+(203, 'FullStack', 'Desarrollador MERN con más de 10 años de experiencia.'),
+(204, 'Back', 'Experto en bases de datos SQL y NoSQL, optimización de consultas.'),
+(205, 'Front', 'Diseñador de UX/UI con amplios conocimientos de CSS Grid y Flexbox.'),
+(206, 'FullStack', 'Especialista en Python con Django y React.'),
+(207, 'Back', 'Desarrollador backend con Node.js, Express y NestJS.'),
+(208, 'Front', 'Experto en Angular y desarrollo de PWAs (Progressive Web Apps).'),
+(209, 'FullStack', 'Apasionado por DevOps y la integración continua (CI/CD).'),
+(210, 'Back', 'Especialista en seguridad de aplicaciones y hacking ético.'),
+(211, 'Front', 'Desarrollador de aplicaciones móviles híbridas con Ionic y React Native.'),
+(212, 'FullStack', 'Experto en metodologías ágiles como Scrum y Kanban.'),
+(213, 'Back', 'Especialista en Go (Golang) para sistemas de alto rendimiento.'),
+(214, 'Front', 'Animación de interfaces con GSAP y librerías de JavaScript.'),
+(215, 'FullStack', 'Profesor con experiencia en startups y escalado de productos.'),
+(216, 'Back', 'Desarrollo con PHP y el ecosistema de Laravel.'),
+(217, 'Front', 'Maquetación accesible y compatible con todos los navegadores.'),
+(218, 'FullStack', 'Experiencia en la nube con AWS, Google Cloud y Azure.'),
+(219, 'Back', 'Especialista en la creación de APIs RESTful robustas.'),
+(220, 'Front', 'Desarrollo de e-commerce con Shopify y Headless CMS.'),
+(221, 'FullStack', 'Arquitecto de soluciones de software para grandes empresas.'),
+(222, 'Back', 'Experto en .NET y el ecosistema de Microsoft.'),
+(223, 'Front', 'Especialista en Vue.js y Nuxt.js para renderizado en servidor.'),
+(224, 'FullStack', 'Mentoría de perfiles junior y gestión de equipos.'),
+(225, 'Back', 'Desarrollo de sistemas embebidos y IoT.'),
+(226, 'Front', 'Conocimientos avanzados de Webpack y herramientas de build.'),
+(227, 'FullStack', 'Especialista en la creación de tests unitarios y de integración.'),
+(228, 'Back', 'Experiencia en el sector financiero y Fintech.'),
+(229, 'Front', 'Desarrollo de dashboards y visualización de datos con D3.js.'),
+(230, 'FullStack', 'Experto en C# y desarrollo de videojuegos con Unity.'),
+(231, 'Back', 'Especialista en Ruby on Rails.'),
+(232, 'Front', 'Maquetación con Tailwind CSS.'),
+(233, 'FullStack', 'Profesor de Clean Code y principios SOLID.'),
+(234, 'Back', 'Experto en Kafka y sistemas de mensajería.'),
+(235, 'Front', 'Especialista en Svelte y SvelteKit.'),
+(236, 'FullStack', 'Experiencia en la migración de sistemas monolíticos a microservicios.'),
+(237, 'Back', 'Desarrollo de plugins para WordPress.'),
+(238, 'Front', 'Experto en optimización de rendimiento web (WPO).'),
+(239, 'FullStack', 'Especialista en serverless y funciones en la nube.'),
+(240, 'Back', 'Experiencia con Elixir y Phoenix para aplicaciones en tiempo real.'),
+(241, 'Front', 'Desarrollo con Elm, un lenguaje funcional para el frontend.'),
+(242, 'FullStack', 'Profesor de algoritmos y estructuras de datos.'),
+(243, 'Back', 'Especialista en GraphQL para la creación de APIs.'),
+(244, 'Front', 'Experto en la creación de Design Systems.'),
+(245, 'FullStack', 'Desarrollo de aplicaciones blockchain y Web3.'),
+(246, 'Back', 'Experto en bases de datos de grafos como Neo4j.'),
+(247, 'Front', 'Especialista en Three.js y WebGL para gráficos 3D.'),
+(248, 'FullStack', 'Consultor tecnológico y de transformación digital.'),
+(249, 'Back', 'Desarrollo de aplicaciones con Rust.'),
+(250, 'Front', 'Experto en SEO técnico para aplicaciones web.');

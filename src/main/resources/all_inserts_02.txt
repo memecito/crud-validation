@@ -1,0 +1,278 @@
+INSERT INTO teacher (branch, comments) VALUES
+( 'Back', 'Experto en arquitectura de microservicios con Java y Spring Boot.'),
+( 'Front', 'Especialista en desarrollo de interfaces con React y TypeScript.'),
+( 'FullStack', 'Desarrollador MERN con más de 10 años de experiencia.'),
+( 'Back', 'Experto en bases de datos SQL y NoSQL, optimización de consultas.'),
+( 'Front', 'Diseñador de UX/UI con amplios conocimientos de CSS Grid y Flexbox.'),
+( 'FullStack', 'Especialista en Python con Django y React.'),
+( 'Back', 'Desarrollador backend con Node.js, Express y NestJS.'),
+( 'Front', 'Experto en Angular y desarrollo de PWAs (Progressive Web Apps).'),
+( 'FullStack', 'Apasionado por DevOps y la integración continua (CI/CD).'),
+( 'Back', 'Especialista en seguridad de aplicaciones y hacking ético.'),
+( 'Front', 'Desarrollador de aplicaciones móviles híbridas con Ionic y React Native.'),
+( 'FullStack', 'Experto en metodologías ágiles como Scrum y Kanban.'),
+( 'Back', 'Especialista en Go (Golang) para sistemas de alto rendimiento.'),
+( 'Front', 'Animación de interfaces con GSAP y librerías de JavaScript.'),
+( 'FullStack', 'Profesor con experiencia en startups y escalado de productos.'),
+( 'Back', 'Desarrollo con PHP y el ecosistema de Laravel.'),
+( 'Front', 'Maquetación accesible y compatible con todos los navegadores.'),
+( 'FullStack', 'Experiencia en la nube con AWS, Google Cloud y Azure.'),
+( 'Back', 'Especialista en la creación de APIs RESTful robustas.'),
+( 'Front', 'Desarrollo de e-commerce con Shopify y Headless CMS.'),
+( 'FullStack', 'Arquitecto de soluciones de software para grandes empresas.'),
+( 'Back', 'Experto en .NET y el ecosistema de Microsoft.'),
+( 'Front', 'Especialista en Vue.js y Nuxt.js para renderizado en servidor.'),
+( 'FullStack', 'Mentoría de perfiles junior y gestión de equipos.'),
+( 'Back', 'Desarrollo de sistemas embebidos y IoT.'),
+( 'Front', 'Conocimientos avanzados de Webpack y herramientas de build.'),
+( 'FullStack', 'Especialista en la creación de tests unitarios y de integración.'),
+( 'Back', 'Experiencia en el sector financiero y Fintech.'),
+( 'Front', 'Desarrollo de dashboards y visualización de datos con D3.js.'),
+( 'FullStack', 'Experto en C# y desarrollo de videojuegos con Unity.'),
+( 'Back', 'Especialista en Ruby on Rails.'),
+( 'Front', 'Maquetación con Tailwind CSS.'),
+( 'FullStack', 'Profesor de Clean Code y principios SOLID.'),
+( 'Back', 'Experto en Kafka y sistemas de mensajería.'),
+( 'Front', 'Especialista en Svelte y SvelteKit.'),
+( 'FullStack', 'Experiencia en la migración de sistemas monolíticos a microservicios.'),
+( 'Back', 'Desarrollo de plugins para WordPress.'),
+( 'Front', 'Experto en optimización de rendimiento web (WPO).'),
+( 'FullStack', 'Especialista en serverless y funciones en la nube.'),
+( 'Back', 'Experiencia con Elixir y Phoenix para aplicaciones en tiempo real.'),
+( 'Front', 'Desarrollo con Elm, un lenguaje funcional para el frontend.'),
+( 'FullStack', 'Profesor de algoritmos y estructuras de datos.'),
+( 'Back', 'Especialista en GraphQL para la creación de APIs.'),
+( 'Front', 'Experto en la creación de Design Systems.'),
+( 'FullStack', 'Desarrollo de aplicaciones blockchain y Web3.'),
+( 'Back', 'Experto en bases de datos de grafos como Neo4j.'),
+( 'Front', 'Especialista en Three.js y WebGL para gráficos 3D.'),
+( 'FullStack', 'Consultor tecnológico y de transformación digital.'),
+( 'Back', 'Desarrollo de aplicaciones con Rust.'),
+( 'Front', 'Experto en SEO técnico para aplicaciones web.');
+
+INSERT INTO students (num_hours_week, comments, branch, id_teacher) VALUES
+(20, 'Estudiante del bootcamp de Backend enfocado en Java.', 'Back', 1),
+(25, 'Alumna con gran interés en el diseño de interfaces y UX.', 'Front', 2),
+(40, 'Estudiante a tiempo completo del máster FullStack.', 'FullStack', 3),
+(15, 'Estudiante de último año de carrera, especializándose en BBDD.', 'Back', 4),
+(20, 'Alumno con perfil creativo y ganas de aprender React.', 'Front', 5),
+(30, 'Estudiante muy motivado en el path de FullStack con Python.', 'FullStack', 6),
+(20, 'Interesado en aprender a construir APIs con Node.js.', 'Back', 7),
+(25, 'Alumna enfocada en el desarrollo de aplicaciones para móviles.', 'Front', 8),
+(35, 'Estudiante con experiencia previa como sysadmin.', 'FullStack', 9),
+(10, 'Profesional de redes buscando ampliar conocimientos en ciberseguridad.', 'Back', 10),
+(20, 'Alumna muy participativa en las clases de Front.', 'Front', 1),
+(40, 'Estudiante del bootcamp intensivo de FullStack.', 'FullStack', 2),
+(20, 'Estudiante con gran capacidad para la lógica de programación.', 'Back', 3),
+(15, 'Alumna de diseño gráfico aprendiendo a animar con código.', 'Front', 4),
+(30, 'Emprendedor que quiere aprender a programar para su startup.', 'FullStack', 5),
+(20, 'Estudiante con conocimientos previos de PHP.', 'Back', 6),
+(20, 'Alumna muy detallista en la maquetación y el CSS.', 'Front', 7),
+(35, 'Estudiante del curso de especialización en arquitecturas cloud.', 'FullStack', 8),
+(25, 'Interesado en el diseño y consumo de APIs REST.', 'Back', 9),
+(15, 'Alumna con ganas de aprender a crear tiendas online.', 'Front', 20),
+(40, 'Profesional con experiencia buscando un rol de arquitecto de software.', 'FullStack', 21),
+(20, 'Estudiante del bootcamp de .NET.', 'Back', 22),
+(20, 'Alumno con experiencia en React, ahora aprendiendo Vue.js.', 'Front', 23),
+(30, 'Estudiante que aspira a ser Tech Lead en el futuro.', 'FullStack', 24),
+(15, 'Ingeniero electrónico aprendiendo a programar microcontroladores.', 'Back', 25),
+(20, 'Alumna interesada en la optimización y el tooling de frontend.', 'Front', 26),
+(30, 'Estudiante muy metódico, con especial interés en TDD.', 'FullStack', 27),
+(20, 'Profesional de finanzas aprendiendo a programar para el sector Fintech.', 'Back', 28),
+(25, 'Alumna de análisis de datos que quiere aprender a visualizarlos.', 'Front', 29),
+(35, 'Estudiante con pasión por los videojuegos.', 'FullStack', 20),
+(10, 'Estudiante con conocimientos de Ruby.', 'Back', 31),
+(20, 'Alumna que quiere dominar la maquetación moderna con Tailwind.', 'Front', 32),
+(40, 'Estudiante del máster de calidad de software.', 'FullStack', 33),
+(15, 'Ingeniero de datos interesado en sistemas de streaming.', 'Back', 34),
+(20, 'Alumno de frontend explorando nuevas tecnologías como Svelte.', 'Front', 35),
+(35, 'Profesional que trabaja en un proyecto de migración a microservicios.', 'FullStack', 36),
+(10, 'Desarrollador web que quiere especializarse en WordPress.', 'Back', 37),
+(20, 'Alumna de marketing digital aprendiendo sobre SEO técnico.', 'Front', 38),
+(30, 'Estudiante del curso de arquitecturas serverless.', 'FullStack', 39),
+(15, 'Estudiante de doctorado investigando lenguajes de programación.', 'Back', 40),
+(20, 'Alumno de ciencias de la computación explorando programación funcional.', 'Front', 41),
+(35, 'Estudiante que se prepara para entrevistas técnicas en grandes empresas.', 'FullStack', 42),
+(20, 'Interesado en la flexibilidad que ofrece GraphQL sobre REST.', 'Back', 43),
+(25, 'Diseñadora UX que quiere aprender a implementar Design Systems.', 'Front', 44),
+(40, 'Estudiante del bootcamp de Blockchain y Web3.', 'FullStack', 45),
+(15, 'Estudiante de BBDD interesado en modelos no relacionales.', 'Back', 46),
+(20, 'Alumno de Bellas Artes explorando el arte generativo con código.', 'Front', 47),
+(30, 'Consultor que quiere entender mejor la parte técnica de los proyectos.', 'FullStack', 48),
+(10, 'Estudiante de bajo nivel interesado en Rust.', 'Back', 49),
+(20, 'Alumna que quiere especializarse en accesibilidad web (a11y).', 'Front', 50);
+
+INSERT INTO persons (username, password, name, surname, company_email, active, created_date, image_url, termination_date, student_id, teacher_id, rol) VALUES
+('user_ana', 'aN3bC', 'Ana', 'Gómez', 'ana.gomez@university.com', true, '2024-09-01 09:15:00', 'https://placehold.co/200x100', NULL, 1, NULL, 'student'),
+('user_bruno', 'bR5uN', 'Bruno', 'Martín', 'bruno.martin@university.com', true, '2024-09-01 09:20:00', 'https://placehold.co/200x100', NULL, 2, NULL, 'student'),
+('user_clara', 'cLa8R', 'Clara', 'Ruiz', 'clara.ruiz@university.com', true, '2024-09-01 09:25:00', 'https://placehold.co/200x100', NULL, 3, NULL, 'student'),
+('user_dario', 'dAr1O', 'Darío', 'López', 'dario.lopez@university.com', true, '2024-09-02 10:00:00', 'https://placehold.co/200x100', NULL, 4, NULL, 'student'),
+('user_elena', 'eLe9N', 'Elena', 'Díaz', 'elena.diaz@university.com', false, '2024-09-02 10:05:00', 'https://placehold.co/200x100', '2025-03-15', 5, NULL, 'student'),
+('user_fabio', 'fAb2I', 'Fabio', 'Sánchez', 'fabio.sanchez@university.com', true, '2024-09-02 10:10:00', 'https://placehold.co/200x100', NULL, 6, NULL, 'student'),
+('user_gema', 'gEm4A', 'Gema', 'García', 'gema.garcia@university.com', true, '2024-09-03 11:00:00', 'https://placehold.co/200x100', NULL, 7, NULL, 'student'),
+('user_hugo', 'hUg7O', 'Hugo', 'Pérez', 'hugo.perez@university.com', true, '2024-09-03 11:05:00', 'https://placehold.co/200x100', NULL, 8, NULL, 'student'),
+('user_ines', 'iNe3S', 'Inés', 'Martínez', 'ines.martinez@university.com', true, '2024-09-03 11:10:00', 'https://placehold.co/200x100', NULL, 9, NULL, 'student'),
+('user_jaime', 'jA1mE', 'Jaime', 'Fernández', 'jaime.fernandez@university.com', true, '2024-09-04 12:00:00', 'https://placehold.co/200x100', NULL, 10, NULL, 'student'),
+('user_lara', 'lAr6A', 'Lara', 'Moreno', 'lara.moreno@university.com', false, '2024-09-04 12:05:00', 'https://placehold.co/200x100', '2025-06-30', 11, NULL, 'student'),
+('user_mario', 'mAr4O', 'Mario', 'González', 'mario.gonzalez@university.com', true, '2024-09-04 12:10:00', 'https://placehold.co/200x100', NULL, 12, NULL, 'student'),
+('user_noa', 'nOa5A', 'Noa', 'Rodríguez', 'noa.rodriguez@university.com', true, '2024-09-05 13:00:00', 'https://placehold.co/200x100', NULL, 13, NULL, 'student'),
+('user_oliver', 'oLi8V', 'Óliver', 'Castro', 'oliver.castro@university.com', true, '2024-09-05 13:05:00', 'https://placehold.co/200x100', NULL, 14, NULL, 'student'),
+('user_paula', 'pAu2L', 'Paula', 'Romero', 'paula.romero@university.com', true, '2024-09-05 13:10:00', 'https://placehold.co/200x100', NULL, 15, NULL, 'student'),
+('user_quique', 'qIq9E', 'Quique', 'Navarro', 'quique.navarro@university.com', true, '2024-09-06 14:00:00', 'https://placehold.co/200x100', NULL, 16, NULL, 'student'),
+('user_rita', 'rIt1A', 'Rita', 'Soto', 'rita.soto@university.com', false, '2024-09-06 14:05:00', 'https://placehold.co/200x100', '2025-08-01', 17, NULL, 'student'),
+('user_samuel', 'sAm6L', 'Samuel', 'Vega', 'samuel.vega@university.com', true, '2024-09-06 14:10:00', 'https://placehold.co/200x100', NULL, 18, NULL, 'student'),
+('user_tania', 'tAn3A', 'Tania', 'Muñoz', 'tania.munoz@university.com', true, '2024-09-09 15:00:00', 'https://placehold.co/200x100', NULL, 19, NULL, 'student'),
+('user_unai', 'uNa7I', 'Unai', 'Blanco', 'unai.blanco@university.com', true, '2024-09-09 15:05:00', 'https://placehold.co/200x100', NULL, 20, NULL, 'student'),
+('user_valeria', 'vAl8R', 'Valeria', 'Castillo', 'valeria.castillo@university.com', true, '2024-09-09 15:10:00', 'https://placehold.co/200x100', NULL, 21, NULL, 'student'),
+('user_walter', 'wAl1T', 'Walter', 'Gil', 'walter.gil@university.com', true, '2024-09-10 16:00:00', 'https://placehold.co/200x100', NULL, 22, NULL, 'student'),
+('user_ximena', 'xIm5N', 'Ximena', 'Fuentes', 'ximena.fuentes@university.com', true, '2024-09-10 16:05:00', 'https://placehold.co/200x100', NULL, 23, NULL, 'student'),
+('user_yago', 'yAg9O', 'Yago', 'Álvarez', 'yago.alvarez@university.com', false, '2024-09-10 16:10:00', 'https://placehold.co/200x100', '2025-01-20', 24, NULL, 'student'),
+('user_zoe', 'zOe2A', 'Zoe', 'Prieto', 'zoe.prieto@university.com', true, '2024-09-11 17:00:00', 'https://placehold.co/200x100', NULL, 25, NULL, 'student'),
+('prof_alberto', 'aLb4T', 'Alberto', 'Ramos', 'alberto.ramos@school.com', true, '2022-08-15 08:00:00', 'https://placehold.co/200x100', NULL, NULL, 1, 'teacher'),
+('prof_beatriz', 'bEa8Z', 'Beatriz', 'Suárez', 'beatriz.suarez@school.com', true, '2021-08-20 08:10:00', 'https://placehold.co/200x100', NULL, NULL, 2, 'teacher'),
+('prof_carlos', 'cAr1S', 'Carlos', 'Guerrero', 'carlos.guerrero@school.com', true, '2020-08-25 08:20:00', 'https://placehold.co/200x100', NULL, NULL, 3, 'teacher'),
+('prof_diana', 'dIa6N', 'Diana', 'Herrero', 'diana.herrero@school.com', false, '2019-09-01 09:00:00', 'https://placehold.co/200x100', '2024-06-30', NULL, 4, 'teacher'),
+('prof_esteban', 'eSt3B', 'Esteban', 'Jiménez', 'esteban.jimenez@school.com', true, '2022-09-02 09:10:00', 'https://placehold.co/200x100', NULL, NULL, 5, 'teacher'),
+('prof_fatima', 'fAt7M', 'Fátima', 'Pascual', 'fatima.pascual@school.com', true, '2021-09-03 09:20:00', 'https://placehold.co/200x100', NULL, NULL, 6, 'teacher'),
+('prof_gabriel', 'gAb9L', 'Gabriel', 'Núñez', 'gabriel.nunez@school.com', true, '2020-09-04 10:00:00', 'https://placehold.co/200x100', NULL, NULL, 7, 'teacher'),
+('prof_helena', 'hEl2A', 'Helena', 'Caballero', 'helena.caballero@school.com', true, '2019-09-05 10:10:00', 'https://placehold.co/200x100', NULL, NULL, 8, 'teacher'),
+('prof_ivan', 'iVa5N', 'Iván', 'Ortega', 'ivan.ortega@school.com', true, '2022-09-06 10:20:00', 'https://placehold.co/200x100', NULL, NULL, 9, 'teacher'),
+('prof_julia', 'jUl8A', 'Julia', 'Vidal', 'julia.vidal@school.com', false, '2021-09-09 11:00:00', 'https://placehold.co/200x100', '2025-08-31', NULL, 10, 'teacher'),
+('prof_kevin', 'kEv1N', 'Kevin', 'Ferrer', 'kevin.ferrer@school.com', true, '2020-09-10 11:10:00', 'https://placehold.co/200x100', NULL, NULL, 11, 'teacher'),
+('prof_lucia', 'lUc4A', 'Lucía', 'Molina', 'lucia.molina@school.com', true, '2019-09-11 11:20:00', 'https://placehold.co/200x100', NULL, NULL, 12, 'teacher'),
+('prof_marcos', 'mAr6S', 'Marcos', 'Bravo', 'marcos.bravo@school.com', true, '2022-09-12 12:00:00', 'https://placehold.co/200x100', NULL, NULL, 13, 'teacher'),
+('prof_natalia', 'nAt9L', 'Natalia', 'Crespo', 'natalia.crespo@school.com', true, '2021-09-13 12:10:00', 'https://placehold.co/200x100', NULL, NULL, 14, 'teacher'),
+('prof_oscar', 'oSc2R', 'Óscar', 'Robles', 'oscar.robles@school.com', true, '2020-09-14 12:20:00', 'https://placehold.co/200x100', NULL, NULL, 15, 'teacher'),
+('prof_patricia', 'pAt5C', 'Patricia', 'Gallego', 'patricia.gallego@school.com', true, '2019-09-15 13:00:00', 'https://placehold.co/200x100', NULL, NULL, 16, 'teacher'),
+('prof_quintin', 'qIn8T', 'Quintín', 'Carrasco', 'quintin.carrasco@school.com', true, '2022-09-16 13:10:00', 'https://placehold.co/200x100', NULL, NULL, 17, 'teacher'),
+('prof_rebeca', 'rEb1A', 'Rebeca', 'Soler', 'rebeca.soler@school.com', false, '2021-09-17 13:20:00', 'https://placehold.co/200x100', '2024-12-31', NULL, 18, 'teacher'),
+('prof_sergio', 'sEr4O', 'Sergio', 'Santos', 'sergio.santos@school.com', true, '2020-09-18 14:00:00', 'https://placehold.co/200x100', NULL, NULL, 19, 'teacher'),
+('prof_teresa', 'tEr7A', 'Teresa', 'Calvo', 'teresa.calvo@school.com', true, '2019-09-21 14:10:00', 'https://placehold.co/200x100', NULL, NULL, 20, 'teacher'),
+('prof_victor', 'vIc9R', 'Víctor', 'Alonso', 'victor.alonso@school.com', true, '2022-09-22 14:20:00', 'https://placehold.co/200x100', NULL, NULL, 21, 'teacher'),
+('prof_wendy', 'wEn2Y', 'Wendy', 'Simón', 'wendy.simon@school.com', true, '2021-09-23 15:00:00', 'https://placehold.co/200x100', NULL, NULL, 22, 'teacher'),
+('prof_xavier', 'xAv5R', 'Xavier', 'Pastor', 'xavier.pastor@school.com', true, '2020-09-24 15:10:00', 'https://placehold.co/200x100', NULL, NULL, 23, 'teacher'),
+('prof_yolanda', 'yOl8D', 'Yolanda', 'Gómez', 'yolanda.gomez@school.com', true, '2019-09-25 15:20:00', 'https://placehold.co/200x100', NULL, NULL, 24, 'teacher'),
+('prof_zacarias', 'zAe3S', 'Zacarías', 'Martín', 'zacarias.martin@school.com', false, '2022-09-26 16:00:00', 'https://placehold.co/200x100', '2025-07-01', NULL, 25, 'teacher');
+INSERT INTO subject (subject, comments, initial_date, finish_date) VALUES
+('Matemáticas I', 'Curso de cálculo diferencial y álgebra lineal.', '2024-09-09 09:00:00', '2025-06-20 11:00:00'),
+('Lengua Castellana y Literatura', 'Análisis de la literatura del Siglo de Oro y sintaxis avanzada.', '2024-09-09 11:00:00', '2025-06-20 13:00:00'),
+('Historia de España', 'Estudio del periodo contemporáneo, siglos XIX y XX.', '2024-09-09 10:00:00', '2025-06-19 12:00:00'),
+('Física y Química', 'Fundamentos de la mecánica clásica y la tabla periódica.', '2024-09-10 09:00:00', '2025-06-21 11:00:00'),
+('Biología y Geología', 'Genética mendeliana y tectónica de placas.', '2024-09-10 12:00:00', '2025-06-21 14:00:00'),
+('Inglés Avanzado', 'Preparación para el nivel C1, enfocado en conversación.', '2024-09-11 16:00:00', '2025-06-18 18:00:00'),
+('Filosofía', 'Introducción a los grandes pensadores, desde Platón a Nietzsche.', '2024-09-11 10:00:00', '2025-06-18 12:00:00'),
+('Educación Física', 'Desarrollo de deportes de equipo y condición física.', '2024-09-12 14:00:00', '2025-06-19 16:00:00'),
+('Tecnología Industrial', 'Principios de neumática, hidráulica y sistemas automáticos.', '2024-09-12 09:00:00', '2025-06-17 11:00:00'),
+('Dibujo Técnico', 'Sistemas de representación diédrico y axonométrico.', '2024-09-13 11:00:00', '2025-06-17 13:00:00'),
+('Programación en Java', 'Introducción a la Programación Orientada a Objetos.', '2025-02-03 15:00:00', '2025-06-10 17:00:00'),
+('Bases de Datos', 'Modelado de datos con SQL y diseño de esquemas relacionales.', '2025-02-03 17:00:00', '2025-06-10 19:00:00'),
+('Sistemas Operativos', 'Estudio de la gestión de procesos y memoria en sistemas Linux.', '2024-09-16 10:00:00', '2025-01-31 12:00:00'),
+('Redes de Computadoras', 'Fundamentos del modelo OSI y TCP/IP.', '2024-09-16 12:00:00', '2025-01-31 14:00:00'),
+('Economía de la Empresa', 'Análisis de balances y estrategias de marketing.', '2024-09-17 09:00:00', '2025-06-20 11:00:00'),
+('Latín I', 'Introducción a la gramática y traducción de textos sencillos.', '2024-09-17 12:00:00', '2025-06-20 14:00:00'),
+('Inteligencia Artificial', 'Conceptos básicos sobre aprendizaje automático y redes neuronales.', '2025-02-05 10:00:00', '2025-06-12 12:00:00'),
+('Historia del Arte', 'Recorrido por el Renacimiento y el Barroco europeo.', '2024-09-18 11:00:00', '2025-06-19 13:00:00'),
+('Música y Sonido Digital', 'Producción y edición de audio con software especializado.', '2024-09-19 15:00:00', '2025-06-16 17:00:00'),
+('Psicología Social', 'Estudio del comportamiento individual en contextos de grupo.', '2024-09-20 10:00:00', '2025-01-30 12:00:00');
+
+INSERT INTO student_subject (student_id, subject_id) VALUES
+-- Estudiante 1
+(1, 1), (1, 3), (1, 7),
+-- Estudiante 2
+(2, 2), (2, 5), (2, 6), (2, 8),
+-- Estudiante 3
+(3, 11), (3, 12), (3, 13), (3, 14),
+-- Estudiante 4
+(4, 1), (4, 4), (4, 9), (4, 15),
+-- Estudiante 5
+(5, 7), (5, 10), (5, 18),
+-- Estudiante 6
+(6, 2), (6, 3), (6, 6), (6, 20),
+-- Estudiante 7
+(7, 11), (7, 13), (7, 17),
+-- Estudiante 8
+(8, 1), (8, 5), (8, 9), (8, 16), (8, 19),
+-- Estudiante 9
+(9, 4), (9, 8), (9, 10),
+-- Estudiante 10
+(10, 2), (10, 6), (10, 18), (10, 20),
+-- Estudiante 11
+(11, 12), (11, 13), (11, 14),
+-- Estudiante 12
+(12, 1), (12, 3), (12, 5), (12, 7),
+-- Estudiante 13
+(13, 2), (13, 8), (13, 10),
+-- Estudiante 14
+(14, 4), (14, 9), (14, 15), (14, 18),
+-- Estudiante 15
+(15, 6), (15, 16), (15, 20),
+-- Estudiante 16
+(16, 11), (16, 17), (16, 19), (16, 20),
+-- Estudiante 17
+(17, 1), (17, 3), (17, 7),
+-- Estudiante 18
+(18, 2), (18, 5), (18, 6), (18, 8),
+-- Estudiante 19
+(19, 11), (19, 12), (19, 13), (19, 14),
+-- Estudiante 20
+(20, 1), (20, 4), (20, 9), (20, 15),
+-- Estudiante 21
+(21, 7), (21, 10), (21, 18),
+-- Estudiante 22
+(22, 2), (22, 3), (22, 6), (22, 20),
+-- Estudiante 23
+(23, 11), (23, 13), (23, 17),
+-- Estudiante 24
+(24, 1), (24, 5), (24, 9), (24, 16), (24, 19),
+-- Estudiante 25
+(25, 4), (25, 8), (25, 10),
+-- Estudiante 26
+(26, 2), (26, 6), (26, 18), (26, 20),
+-- Estudiante 27
+(27, 12), (27, 13), (27, 14),
+-- Estudiante 28
+(28, 1), (28, 3), (28, 5), (28, 7),
+-- Estudiante 29
+(29, 2), (29, 8), (29, 10),
+-- Estudiante 30
+(30, 4), (30, 9), (30, 15), (30, 18),
+-- Estudiante 31
+(31, 6), (31, 16), (31, 20),
+-- Estudiante 32
+(32, 11), (32, 17), (32, 19), (32, 20),
+-- Estudiante 33
+(33, 1), (33, 3), (33, 7),
+-- Estudiante 34
+(34, 2), (34, 5), (34, 6), (34, 8),
+-- Estudiante 35
+(35, 11), (35, 12), (35, 13), (35, 14),
+-- Estudiante 36
+(36, 1), (36, 4), (36, 9), (36, 15),
+-- Estudiante 37
+(37, 7), (37, 10), (37, 18),
+-- Estudiante 38
+(38, 2), (38, 3), (38, 6), (38, 20),
+-- Estudiante 39
+(39, 11), (39, 13), (39, 17),
+-- Estudiante 40
+(40, 1), (40, 5), (40, 9), (40, 16), (40, 19),
+-- Estudiante 41
+(41, 4), (41, 8), (41, 10),
+-- Estudiante 42
+(42, 2), (42, 6), (42, 18), (42, 20),
+-- Estudiante 43
+(43, 12), (43, 13), (43, 14),
+-- Estudiante 44
+(44, 1), (44, 3), (44, 5), (44, 7),
+-- Estudiante 45
+(45, 2), (45, 8), (45, 10),
+-- Estudiante 46
+(46, 4), (46, 9), (46, 15), (46, 18),
+-- Estudiante 47
+(47, 6), (47, 16), (47, 20),
+-- Estudiante 48
+(48, 11), (48, 17), (48, 19), (48, 20),
+-- Estudiante 49
+(49, 1), (49, 3), (49, 7),
+-- Estudiante 50
+(50, 2), (50, 5), (50, 6), (50, 8);

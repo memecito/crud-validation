@@ -1,0 +1,114 @@
+-- Elimina la tabla si ya existe para una ejecución limpia.
+DROP TABLE IF EXISTS student_subject;
+
+-- Crea la tabla de unión.
+-- La clave primaria compuesta (student_id, subject_id) asegura que un estudiante
+-- no pueda estar inscrito en la misma asignatura más de una vez.
+CREATE TABLE student_subject (
+    student_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    PRIMARY KEY (student_id, subject_id)
+);
+
+-- Inserta las relaciones entre estudiantes y asignaturas.
+INSERT INTO student_subject (student_id, subject_id) VALUES
+-- Estudiante 1
+(1, 1), (1, 3), (1, 7),
+-- Estudiante 2
+(2, 2), (2, 5), (2, 6), (2, 8),
+-- Estudiante 3
+(3, 11), (3, 12), (3, 13), (3, 14),
+-- Estudiante 4
+(4, 1), (4, 4), (4, 9), (4, 15),
+-- Estudiante 5
+(5, 7), (5, 10), (5, 18),
+-- Estudiante 6
+(6, 2), (6, 3), (6, 6), (6, 20),
+-- Estudiante 7
+(7, 11), (7, 13), (7, 17),
+-- Estudiante 8
+(8, 1), (8, 5), (8, 9), (8, 16), (8, 19),
+-- Estudiante 9
+(9, 4), (9, 8), (9, 10),
+-- Estudiante 10
+(10, 2), (10, 6), (10, 18), (10, 20),
+-- Estudiante 11
+(11, 12), (11, 13), (11, 14),
+-- Estudiante 12
+(12, 1), (12, 3), (12, 5), (12, 7),
+-- Estudiante 13
+(13, 2), (13, 8), (13, 10),
+-- Estudiante 14
+(14, 4), (14, 9), (14, 15), (14, 18),
+-- Estudiante 15
+(15, 6), (15, 16), (15, 20),
+-- Estudiante 16
+(16, 11), (16, 17), (16, 19), (16, 20),
+-- Estudiante 17
+(17, 1), (17, 3), (17, 7),
+-- Estudiante 18
+(18, 2), (18, 5), (18, 6), (18, 8),
+-- Estudiante 19
+(19, 11), (19, 12), (19, 13), (19, 14),
+-- Estudiante 20
+(20, 1), (20, 4), (20, 9), (20, 15),
+-- Estudiante 21
+(21, 7), (21, 10), (21, 18),
+-- Estudiante 22
+(22, 2), (22, 3), (22, 6), (22, 20),
+-- Estudiante 23
+(23, 11), (23, 13), (23, 17),
+-- Estudiante 24
+(24, 1), (24, 5), (24, 9), (24, 16), (24, 19),
+-- Estudiante 25
+(25, 4), (25, 8), (25, 10),
+-- Estudiante 26
+(26, 2), (26, 6), (26, 18), (26, 20),
+-- Estudiante 27
+(27, 12), (27, 13), (27, 14),
+-- Estudiante 28
+(28, 1), (28, 3), (28, 5), (28, 7),
+-- Estudiante 29
+(29, 2), (29, 8), (29, 10),
+-- Estudiante 30
+(30, 4), (30, 9), (30, 15), (30, 18),
+-- Estudiante 31
+(31, 6), (31, 16), (31, 20),
+-- Estudiante 32
+(32, 11), (32, 17), (32, 19), (32, 20),
+-- Estudiante 33
+(33, 1), (33, 3), (33, 7),
+-- Estudiante 34
+(34, 2), (34, 5), (34, 6), (34, 8),
+-- Estudiante 35
+(35, 11), (35, 12), (35, 13), (35, 14),
+-- Estudiante 36
+(36, 1), (36, 4), (36, 9), (36, 15),
+-- Estudiante 37
+(37, 7), (37, 10), (37, 18),
+-- Estudiante 38
+(38, 2), (38, 3), (38, 6), (38, 20),
+-- Estudiante 39
+(39, 11), (39, 13), (39, 17),
+-- Estudiante 40
+(40, 1), (40, 5), (40, 9), (40, 16), (40, 19),
+-- Estudiante 41
+(41, 4), (41, 8), (41, 10),
+-- Estudiante 42
+(42, 2), (42, 6), (42, 18), (42, 20),
+-- Estudiante 43
+(43, 12), (43, 13), (43, 14),
+-- Estudiante 44
+(44, 1), (44, 3), (44, 5), (44, 7),
+-- Estudiante 45
+(45, 2), (45, 8), (45, 10),
+-- Estudiante 46
+(46, 4), (46, 9), (46, 15), (46, 18),
+-- Estudiante 47
+(47, 6), (47, 16), (47, 20),
+-- Estudiante 48
+(48, 11), (48, 17), (48, 19), (48, 20),
+-- Estudiante 49
+(49, 1), (49, 3), (49, 7),
+-- Estudiante 50
+(50, 2), (50, 5), (50, 6), (50, 8);

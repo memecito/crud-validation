@@ -2,6 +2,7 @@ package es.nter.crud_validation.application.services.impl;
 
 import es.nter.crud_validation.application.mappers.SubjectMapper;
 import es.nter.crud_validation.application.services.SubjectService;
+import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.domain.models.Subject;
 import es.nter.crud_validation.error.DeleteSubjectException;
 import es.nter.crud_validation.error.EntityNotFoundException;
@@ -18,6 +19,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
     private final SubjectMapper subjectMapper;
+    private final StudentServiceImpl studentService;
 
     @Override
     public List<Subject> getAllSubject(int pageNumber, int pageSize) {
@@ -52,6 +54,7 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectMapper.update(getSubjectById(id),subject);
     }
 
+    /*
     @Override
     public void deleteSubject(long id) {
 
@@ -62,5 +65,17 @@ public class SubjectServiceImpl implements SubjectService {
            throw  new DeleteSubjectException("Esta asignatura esta siendo cursada");
 
        }
+    }
+
+     */
+
+    @Override
+    public void deleteSubject(long id){
+        Subject subject= getSubjectById(id);
+        for(Student student: subject.getStudentList()){
+            student.getSubjectList().remove(subject);
+        }
+        subject.getStudentList().clear();
+        subjectRepository.delete(subject);
     }
 }
