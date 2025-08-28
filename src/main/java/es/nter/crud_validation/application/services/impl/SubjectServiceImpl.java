@@ -19,7 +19,6 @@ public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
     private final SubjectMapper subjectMapper;
-    private final StudentServiceImpl studentService;
 
     @Override
     public List<Subject> getAllSubject(int pageNumber, int pageSize) {
