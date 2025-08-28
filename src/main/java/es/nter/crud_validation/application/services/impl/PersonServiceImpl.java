@@ -74,11 +74,11 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     public Person addPerson(Person person) {
 
-        if (personRepository.findByUsernameIs(person.getUsername()).isPresent()) {
-            throw new EntityDuplicateException("El usuario: "+person.getUsername()+" ya existe");
-        }else{
-            return personRepository.save(person);
-        }
+        personRepository.findByUsername(person.getUsername())
+                .ifPresent(p -> {
+                    throw new EntityDuplicateException("El usuario: " + p.getUsername() + " ya existe");
+                });
+        return personRepository.save(person);
     }
 
     @Override
