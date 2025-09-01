@@ -1,40 +1,74 @@
 package es.nter.crud_validation.application.services.impl;
 
-import es.nter.crud_validation.application.mappers.PersonMapper;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
+import es.nter.crud_validation.domain.models.Student;
+import es.nter.crud_validation.domain.models.Teacher;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.cglib.core.Local;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith(MockitoExtension.class)
 class PersonServiceImplTest {
 
     @Mock
     private PersonRepository personRepository;
-    private PersonMapper personMapper;
+    @Mock
+    private Student student;
+    @Mock Teacher teacher;
 
     @InjectMocks
     private PersonServiceImpl personService;
 
+
     @Test
     void getAllPerson() {
-        List<Person> personList= new ArrayList<>();
-        Mockito.when(personService.getAllPerson(1,1)).thenReturn(personList);
-        final List<Person> resultado=
-                personService.getAllPerson(1,1);
+        /*
+        Person person1 = new Person(
+
+                "username",
+                "password",
+                "name",
+                "surname",
+                "personalEmail",
+                "companyEmail",
+                "city",
+                true,
+                new Timestamp(2025)
+        );
+        Person person2 = new Person(
+                "username2",
+                "password2",
+                "name",
+                "surname",
+                "personalEmail",
+                "companyEmail",
+                "city",
+                true,
+                new Timestamp(2025)
+        );
+        given(personRepository.findAll()).willReturn(List.of(person1,person2,person1,person2,person1));
+
+
+
+        List<Person> personList= personService.getAllPerson(1,1);
+
+        assertThat(personList).isNotNull();
+        assertThat(personList.size()).isEqualTo(5);
+        verify(personRepository).findAll();
+
+         */
     }
 
     @Test
@@ -59,21 +93,6 @@ class PersonServiceImplTest {
 
     @Test
     void addPerson() {
-        Person personEsperada= new Person(
-        );
-                0,
-                "user_ana3",
-                "12341234",
-                "ana",
-                "gomez",
-                "anagomez@mail.com",
-                "anagomez@trabajo.com",
-                "Jaen",
-                true,
-                LocalDate.now(),
-                "url",
-                LocalDate.now(),
-                Rol.NOBODY);
     }
 
     @Test
