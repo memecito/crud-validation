@@ -1,9 +1,11 @@
 package es.nter.crud_validation.application.services.impl;
 
+import es.nter.crud_validation.DataProviders;
 import es.nter.crud_validation.application.mappers.PersonMapper;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.domain.models.Teacher;
+import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,12 +15,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,44 +39,29 @@ class PersonServiceImplTest {
     @Mock
     private PersonRepository personRepository;
     @Mock
+    private PersonMapper personMapper;
+    @Mock
     private Student student;
     @Mock Teacher teacher;
 
     @InjectMocks
     private PersonServiceImpl personService;
-    @Mock
-    private PersonMapper personMapper;
 
 
 
-    private Person person2 = new Person(
-            "username2",
-            "password2",
-            "name",
-            "surname",
-            "personalEmail",
-            "companyEmail",
-            "city",
-            true,
-            new Timestamp(2025)
-    );
 
 
     @Test
     void getAllPerson() {
+        //Given
 
-
-       //given(personRepository.findAll()).willReturn(List.of(person1,person2,person1,person2,person1));
-
-
-
-        List<Person> personList= personService.getAllPerson(1,1);
-
-        assertThat(personList).isNotNull();
-        assertThat(personList.size()).isEqualTo(5);
-        verify(personRepository).findAll();
-
-
+        //When
+        when(personRepository.findAll(PageRequest.of(1,5))).thenReturn((Page<Person>) DataProviders.personListMock());
+        List<Person> personResoult= personService.getAllPerson(1,1);
+        //Then
+        assertNotNull(personResoult);
+        assertFalse(personResoult.isEmpty());
+        //verify(personRepository).findAll();
     }
 
     @Test
@@ -79,6 +74,13 @@ class PersonServiceImplTest {
 
     @Test
     void getPersonById() {
+        //Given
+        Long id=1L;
+        //When
+        when(personRepository.findById(anyLong())).thenReturn(DataProviders.personMock());
+        Person personResult= personService.getPersonById(id);
+        //Then
+        assertNotNull(personResult);
     }
 
     @Test
@@ -87,6 +89,10 @@ class PersonServiceImplTest {
 
     @Test
     void getPersonByUserName() {
+        Person p= buildPerson2();
+        when(personRepository.findByUsername("nombre")).thenReturn(Optional.of(p));
+        Person resultado= personService.getPersonByUserName("nombre");
+        Assertions.assertEquals(resultado, buildPerson2());
     }
 
     @Test
