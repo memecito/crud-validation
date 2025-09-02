@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/persons")
 @RequiredArgsConstructor
@@ -29,13 +28,13 @@ public class PersonController {
     private final TeacherService teacherService;
     private final TeacherMapper teacherMapper;
 
-    @GetMapping
-    public ResponseEntity<List<PersonOutDtoMini>> getAllPersonActive(
+    @GetMapping("/")
+    public ResponseEntity<List<PersonDto>> getAllPersonActive(
             @RequestParam (defaultValue = "0", required = false) int pageNumber,
             @RequestParam (defaultValue = "5", required = false) int pageSize){
         return ResponseEntity.ok(
                 personService.getAllPersonActive(pageNumber,pageSize)
-                        .stream().map(personMapper::toDtoMini)
+                        .stream().map(personMapper::toDtoStandard)
                         .collect(Collectors.toList())) ;
     }
 
@@ -90,7 +89,7 @@ public class PersonController {
         getPersonById(personService.getPersonByName(name).getId());;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<PersonDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto){
         return
                 ResponseEntity.status(HttpStatus.CREATED).body(

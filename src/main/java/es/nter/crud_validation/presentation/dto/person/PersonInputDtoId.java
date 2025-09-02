@@ -13,23 +13,25 @@ import java.util.Date;
 @Setter
 public class PersonInputDtoId {
     private Long id;
-    //@Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
-    //@NotBlank(message = "Usuario obligatorio")
+    @Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
+    @NotBlank(message = "Usuario obligatorio")
     private String username;
-    //@NotBlank(message = "Nombre obligatorio")
+    @NotBlank(message = "Contraseña obligatoria")
+    private String password;
+    @NotBlank(message = "Nombre obligatorio")
     private String name;
 
     private String surname;
 
     private String personalEmail;
 
-    //@NotBlank(message = "Email obligatorio")
+    @NotBlank(message = "Email obligatorio")
     private String companyEmail;
-    //@NotBlank(message = "Ciudad obligatorio")
+    @NotBlank(message = "Ciudad obligatorio")
     private String city;
-    //@NotNull(message = "Estado obligatorio")
+    @NotNull(message = "Estado obligatorio")
     private Boolean active;
-    //@NotNull(message = "Fecha de creacion obligatorio")
+    @NotNull(message = "Fecha de creacion obligatorio")
     private Date createdDate;
 
     private String imageUrl;
