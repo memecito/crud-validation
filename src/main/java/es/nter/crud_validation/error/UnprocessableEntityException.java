@@ -95,6 +95,16 @@ public class UnprocessableEntityException {
         return new ResponseEntity<>(customError,HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(value = {EntityDuplicateException.class})
+    public ResponseEntity<CustomError> handleTeacherCreatedEntity(EntityDuplicateException ex){
+        CustomError customError= new CustomError(
+                HttpStatus.CONFLICT.value(),
+                "El usuario ya existe",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError,HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(DeletePersonException.class)
     public ResponseEntity<CustomError> handleDeletePerson(DeletePersonException ex){
         CustomError customError= new CustomError(

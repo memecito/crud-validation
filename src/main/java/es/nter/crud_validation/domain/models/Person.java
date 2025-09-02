@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
-
+import java.time.LocalDate;
 
 
 @Getter
@@ -16,6 +16,34 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "persons")
 public class Person {
+
+    public Person(String username, String password, String name, String surname, String personalEmail, String companyEmail, String city, Boolean active, Timestamp createdDate) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.personalEmail = personalEmail;
+        this.companyEmail = companyEmail;
+        this.city = city;
+        this.active = active;
+        this.createdDate = createdDate;
+    }
+    public Person(Long id,String username, String password, String name, String surname, String personalEmail, String companyEmail, String city, Boolean active, Timestamp createdDate) {
+        this.id=id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.personalEmail = personalEmail;
+        this.companyEmail = companyEmail;
+        this.city = city;
+        this.active = active;
+        this.createdDate = createdDate;
+    }
+
+
+
+
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -57,6 +85,5 @@ public class Person {
             orphanRemoval = true)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
-
 
 }

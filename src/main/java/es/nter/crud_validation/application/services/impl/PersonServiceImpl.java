@@ -5,6 +5,7 @@ import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
 import es.nter.crud_validation.error.DeletePersonException;
+import es.nter.crud_validation.error.EntityDuplicateException;
 import es.nter.crud_validation.error.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
@@ -73,16 +74,17 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     public Person addPerson(Person person) {
 
-        return personRepository.save(
-                personRepository.findByUsernameIs(person.getUsername()).orElseThrow(
-                        ()->new EntityNotFoundException("persona no encontrada")
-                )
-        );
+        personRepository.findByUsername(person.getUsername())
+                .ifPresent(p -> {
+                    throw new EntityDuplicateException("El usuario: " + p.getUsername() + " ya existe");
+                });
+        return personRepository.save(person);
     }
 
     @Override
     @Transactional
     public Person updatePerson(long id, Person person) {
+
         return personMapper.update(getPersonById(id),person);
     }
 
