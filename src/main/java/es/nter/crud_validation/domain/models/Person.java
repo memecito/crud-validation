@@ -28,8 +28,9 @@ public class Person {
         this.active = active;
         this.createdDate = createdDate;
     }
-    public Person(Long id,String username, String password, String name, String surname, String personalEmail, String companyEmail, String city, Boolean active, Timestamp createdDate) {
-        this.id=id;
+
+    public Person(Long id, String username, String password, String name, String surname, String personalEmail, String companyEmail, String city, Boolean active, Timestamp createdDate) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
@@ -41,11 +42,9 @@ public class Person {
         this.createdDate = createdDate;
     }
 
-
-
-
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Creacion de los atributos y establer las caracteristicas de la tabla
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false)
     private String username;
@@ -66,7 +65,7 @@ public class Person {
     private String imageUrl;
     private Timestamp terminationDate;
     @Enumerated(EnumType.STRING)
-    private Rol rol= Rol.NOBODY;
+    private Rol rol = Rol.NOBODY;
 
     //RELACIONES
     @JsonManagedReference

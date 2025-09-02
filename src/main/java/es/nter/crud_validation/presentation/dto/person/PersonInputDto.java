@@ -8,10 +8,11 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
+
 @Getter
 @Setter
 public class PersonInputDto {
-    @Length(min=6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
+    @Length(min = 6, max = 10, message = "El nombre debe tener entre 6 y 10 caracteres")
     @NotBlank(message = "Usuario obligatorio")
     private String username;
     @NotBlank(message = "Contraseña obligatorio")
