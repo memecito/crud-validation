@@ -1,11 +1,13 @@
 package es.nter.crud_validation;
 
+import es.nter.crud_validation.domain.models.Branch;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.domain.models.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -42,9 +44,9 @@ public class DataProviders {
                 new Person("user_adrian_ortega", "adrian_ortega_24", "Adrián", "Ortega", "adrian.ortega@email.com", "adrian.ortega@university.com", "Elche", true, new Timestamp(System.currentTimeMillis())),
                 new Person("user_mateo_serrano", "mateoSerrano", "Mateo", "Serrano", "mateo.serrano@email.com", "mateo.serrano@university.com", "Pamplona", true, new Timestamp(System.currentTimeMillis())));
 
-        Pageable pageable = (Pageable) PageRequest.of(0, 10);
-        return new PageImpl<>(personList, (org.springframework.data.domain.Pageable) pageable,personList.size());
 
+        Pageable pageable = PageRequest.of(0,5);
+        return new PageImpl<>(personList,pageable,personList.size());
     }
 
     public static Optional<Person> personMock(){
@@ -59,6 +61,33 @@ public class DataProviders {
                 new Timestamp(System.currentTimeMillis())));
 
     }
+
+    public static List<Student> studentsListMock(){
+        return List.of(
+                new Student(1L, 6, "Curso intensivo de desarrollo de APIs con Node.js y Express.", Branch.BACK),
+                new Student(2L, 8, "Desarrollo de aplicaciones web dinámicas con React y Redux.", Branch.FRONT),
+                new Student(3L, 10, "Proyecto full-stack utilizando Angular para el frontend y Spring Boot para el backend.", Branch.FULLSTACK),
+                new Student(4L, 5, "Fundamentos de bases de datos SQL y modelado de datos con PostgreSQL.", Branch.BACK),
+                new Student(5L, 4, "Maquetación avanzada y diseño responsive con SASS y CSS Grid.", Branch.FRONT),
+                new Student(6L, 8, "Creación de microservicios con Python, FastAPI y Docker.", Branch.BACK),
+                new Student(7L, 6, "Introducción al desarrollo de componentes reutilizables con Vue.js.", Branch.FRONT),
+                new Student(8L, 12, "Bootcamp de desarrollo web completo: desde HTML hasta el despliegue.", Branch.FULLSTACK),
+                new Student(9L, 4, "Gestión de estado y testing en aplicaciones de una sola página (SPA).", Branch.FRONT),
+                new Student(10L, 5, "Autenticación y autorización en sistemas backend usando JWT.", Branch.BACK)
+        );
+    }
+
+    public static Optional<Student> studentOptionalMock(){
+        return Optional.of(
+                new Student(
+                        10L,
+                        5,
+                        "Autenticación y autorización en sistemas backend usando JWT.",
+                        Branch.BACK)
+        );
+    }
+
+
 
 }
 

@@ -84,6 +84,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     @Transactional
     public Person updatePerson(long id, Person person) {
+
         return personMapper.update(getPersonById(id),person);
     }
 

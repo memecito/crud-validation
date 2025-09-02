@@ -44,6 +44,13 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name="subject_id"))
     private List<Subject> subjectList= new ArrayList<>();
 
+    public Student(long id, int numHoursWeek, String comments, Branch branch) {
+        this.id=id;
+        this.numHoursWeek=numHoursWeek;
+        this.comments=comments;
+        this.branch=branch;
+    }
+
 
     //METODOS
     public void addPerson(Person person){
