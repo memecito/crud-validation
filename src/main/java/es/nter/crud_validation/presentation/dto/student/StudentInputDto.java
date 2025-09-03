@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentInputDto {
-    //@NotBlank(message = "Horas obligatorias")
+    private Long id;
+    @NotBlank(message = "Horas obligatorias")
     private int numHoursWeek;
     private String comments;
-    //@NotBlank(message = "Branch obligatorio")
+    @NotBlank(message = "Branch obligatorio")
     private Branch branch;
-    //@NotBlank(message = "Si no es persona como va a estudiar??")
+    @NotBlank(message = "Si no es persona como va a estudiar??")
     private PersonInputDtoId personInputDtoId;
 }
