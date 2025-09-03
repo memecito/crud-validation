@@ -1,4 +1,4 @@
-package es.nter.crud_validation.error;
+package es.nter.crud_validation.presentation.dto;
 
 import lombok.Getter;
 import lombok.Setter;

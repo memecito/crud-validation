@@ -1,4 +1,4 @@
-package es.nter.crud_validation.error;
+package es.nter.crud_validation.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

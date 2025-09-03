@@ -4,8 +4,7 @@ import es.nter.crud_validation.application.mappers.SubjectMapper;
 import es.nter.crud_validation.application.services.SubjectService;
 import es.nter.crud_validation.domain.models.Student;
 import es.nter.crud_validation.domain.models.Subject;
-import es.nter.crud_validation.error.DeleteSubjectException;
-import es.nter.crud_validation.error.EntityNotFoundException;
+import es.nter.crud_validation.exceptions.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
@@ -30,13 +30,12 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Subject getSubjectById(long id) {
 
-        return subjectRepository.findById(id).orElseThrow(
-                ()-> new EntityNotFoundException("subject", id)
-        );
+        return subjectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("subject", id));
     }
 
     @Override
-    public List<Subject> getSubjectByStudentId(long id){
+    public List<Subject> getSubjectByStudentId(long id) {
 
         return Collections.singletonList(subjectRepository.findByStudentList_Id(id));
     }
@@ -50,7 +49,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Subject updateSubject(long id, Subject subject) {
 
-        return subjectMapper.update(getSubjectById(id),subject);
+        return subjectMapper.update(getSubjectById(id), subject);
     }
 
     /*
@@ -69,9 +68,9 @@ public class SubjectServiceImpl implements SubjectService {
      */
 
     @Override
-    public void deleteSubject(long id){
-        Subject subject= getSubjectById(id);
-        for(Student student: subject.getStudentList()){
+    public void deleteSubject(long id) {
+        Subject subject = getSubjectById(id);
+        for (Student student : subject.getStudentList()) {
             student.getSubjectList().remove(subject);
         }
         subject.getStudentList().clear();

@@ -17,6 +17,7 @@ public class StudentInputDto {
     private String comments;
     @NotBlank(message = "Branch obligatorio")
     private Branch branch;
+
     @NotBlank(message = "Si no es persona como va a estudiar??")
     private PersonInputDtoId personInputDtoId;
 }

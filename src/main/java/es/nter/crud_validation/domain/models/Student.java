@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name="students ")
+@Table(name = "students ")
 public class Student {
 
     @Id
@@ -34,32 +34,31 @@ public class Student {
 
 
     @JsonManagedReference
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name="id_teacher", referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "id_teacher", referencedColumnName = "id")
     private Teacher teacherStudent;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "student_subject",
-            joinColumns =  @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name="subject_id"))
-    private List<Subject> subjectList= new ArrayList<>();
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private List<Subject> subjectList = new ArrayList<>();
 
 
     //METODOS
-    public void addPerson(Person person){
-        this.person=person;
+    public void addPerson(Person person) {
+        this.person = person;
     }
 
-    public void addSubject(Subject subject){
+    public void addSubject(Subject subject) {
         this.subjectList.add(subject);
         subject.getStudentList().add(this);
     }
 
-    public void removeSubject(Subject subject){
+    public void removeSubject(Subject subject) {
         this.subjectList.remove(subject);
         subject.getStudentList().remove(this);
     }
-
 
 
 }

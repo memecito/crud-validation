@@ -87,9 +87,8 @@ public class StudentController {
     }
 
     @PutMapping("/{id}/subjects")
-    public ResponseEntity<StudentOutDtoFull> updateStudentSubject(
-            @PathVariable Long id,
-            @RequestBody List<SubjectInputDto> subjectInputDtoList){
+    public ResponseEntity<StudentOutDtoFull> updateStudentSubject(@PathVariable Long id,
+                                                                  @RequestBody List<SubjectInputDto> subjectInputDtoList){
 
         return ResponseEntity.ok(
                 studentMapper.toDtoFull(

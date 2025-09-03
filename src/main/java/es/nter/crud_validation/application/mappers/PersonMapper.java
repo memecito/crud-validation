@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring",uses = {StudentMapper.class, TeacherMapper.class})
 public interface PersonMapper {
 
-    PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
+ //   PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
     //INPUTS
     Person toModelStandard(PersonInputDto personInputDto);

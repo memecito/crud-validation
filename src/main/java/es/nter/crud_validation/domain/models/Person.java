@@ -6,8 +6,6 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,28 +15,41 @@ import java.sql.Timestamp;
 @Table(name = "persons")
 public class Person {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true, nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false)
     private String name;
+
     private String surname;
+
     @Column(nullable = false)
     private String personalEmail;
+
     @Column(nullable = false)
     private String companyEmail;
+
     @Column(nullable = false)
     private String city;
+
     private Boolean active;
+
     @Column(nullable = false)
     private Timestamp createdDate;
+
     private String imageUrl;
+
     private Timestamp terminationDate;
+
     @Enumerated(EnumType.STRING)
-    private Rol rol= Rol.NOBODY;
+    private Rol rol = Rol.NOBODY;
 
     //RELACIONES
     @JsonManagedReference

@@ -27,18 +27,18 @@ public class Teacher {
 
     //RELACIONES
     @JsonBackReference
-    @OneToOne (mappedBy = "teacher")
+    @OneToOne(mappedBy = "teacher")
     private Person person;
 
     @JsonBackReference
     @OneToMany(
             mappedBy = "teacherStudent",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Student> studentList= new ArrayList<>();
+    private List<Student> studentList = new ArrayList<>();
 
     //METODOS
-    public void addPerson(Person person){
-        this.person= person;
+    public void addPerson(Person person) {
+        this.person = person;
     }
 
 }

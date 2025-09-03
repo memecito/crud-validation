@@ -16,10 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name="subject")
+@Table(name = "subject")
 public class Subject {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String subject;
@@ -30,8 +31,7 @@ public class Subject {
 
     //RELACIONES
     @ManyToMany(mappedBy = "subjectList", fetch = FetchType.LAZY)
-    private List<Student> studentList= new ArrayList<>();
-
+    private List<Student> studentList = new ArrayList<>();
 
 
 }

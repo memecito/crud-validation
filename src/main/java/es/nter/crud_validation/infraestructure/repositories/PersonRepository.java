@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person,Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByCity(String city);
 
     Optional<Person> findByName(String name);
+
     Optional<Person> findByUsername(String userName);
 
     List<Person> findByActiveTrue(PageRequest pageRequest);
