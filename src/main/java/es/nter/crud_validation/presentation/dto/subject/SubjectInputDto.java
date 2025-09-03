@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectInputDto {
-
+    private Long id;
     private String subject;
     private String comments;
     private Timestamp initialDate;
