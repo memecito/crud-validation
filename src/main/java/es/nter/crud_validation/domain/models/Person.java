@@ -65,6 +65,7 @@ public class Person {
     private Timestamp createdDate;
     private String imageUrl;
     private Timestamp terminationDate;
+
     @Enumerated(EnumType.STRING)
     private Rol rol= Rol.NOBODY;
 

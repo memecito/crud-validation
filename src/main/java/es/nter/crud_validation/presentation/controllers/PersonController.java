@@ -1,8 +1,6 @@
 package es.nter.crud_validation.presentation.controllers;
 
-import es.nter.crud_validation.application.mappers.TeacherMapper;
 import es.nter.crud_validation.application.services.PersonService;
-import es.nter.crud_validation.application.services.TeacherService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/persons")
 @RequiredArgsConstructor
@@ -25,9 +22,6 @@ public class PersonController {
 
     private final PersonService personService;
     private final PersonMapper personMapper;
-
-    private final TeacherService teacherService;
-    private final TeacherMapper teacherMapper;
 
     @GetMapping
     public ResponseEntity<List<PersonOutDtoMini>> getAllPersonActive(
@@ -39,6 +33,8 @@ public class PersonController {
                         .collect(Collectors.toList())) ;
     }
 
+    //para eliminar en produccion
+    /*
     @GetMapping("/sindto")
     public ResponseEntity<List<Person>> getAllPersonSinDto(
             @RequestParam (defaultValue = "0", required = false) int pageNumber,
@@ -48,6 +44,8 @@ public class PersonController {
                 personService.getAllPersonActive(pageNumber,pageSize)
                         ) ;
     }
+
+     */
 
     @GetMapping("/nobody")
     public ResponseEntity<List<PersonOutDtoMini>> getPersonNobody(
