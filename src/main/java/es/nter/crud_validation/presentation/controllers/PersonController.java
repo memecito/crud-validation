@@ -12,9 +12,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -47,6 +49,12 @@ public class PersonController {
         return ResponseEntity.ok(
                 personService.getAllPersonActive(pageNumber,pageSize)
                         ) ;
+    }
+
+    @GetMapping("/criteria")
+    public ResponseEntity<?> getPersonsParams(@RequestParam Map<String, String> params){
+
+        return null;
     }
 
     @GetMapping("/nobody")
