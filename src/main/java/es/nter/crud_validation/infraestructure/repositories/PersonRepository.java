@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long>, PersonCriteriaRepository {
     List<Person> findByCity(String city);
 
     Optional<Person> findByName(String name);
@@ -21,5 +21,4 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     List<Person> findByRolIs(Rol rol, PageRequest pageRequest);
 
-    Optional<Person> findByUsernameIs(String username);
 }

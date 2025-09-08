@@ -16,8 +16,6 @@ public interface PersonService {
 
     List<Person> getPersonNobody(int pageNumber, int pageSize);
 
-    List<Person> getAdvandedPerson(Map<String, String> params)
-
     Person getPersonById(Long id);
 
     Person getPersonByName(String name);

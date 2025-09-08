@@ -1,5 +1,6 @@
 package es.nter.crud_validation.presentation.dto.subject;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoFull;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoMini;
 import es.nter.crud_validation.presentation.dto.student.StudentOutDtoOnly;
@@ -14,6 +15,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class SubjectOutDtoFull {
     private Long id;
     private String subject;

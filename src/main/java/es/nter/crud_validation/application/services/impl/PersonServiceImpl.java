@@ -29,7 +29,6 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
-    private EntityManager entityManager;
 
 
     @Override
@@ -53,51 +52,6 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findByRolIs(Rol.NOBODY, pageRequest).stream().toList();
     }
 
-    @Override
-    public List<Person> getAdvandedPerson(Map<String, String> params) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Person> criteriaQuery = cb.createQuery(Person.class);
-        Root<Person> personRoot = criteriaQuery.from(Person.class);
-
-        List<Predicate> predicates = new ArrayList<>();
-        for (String key : params.keySet()) {
-            switch (key) {
-                case "user":
-                    if (!key.isEmpty() && key != null){
-                        predicates.add(cb.like(personRoot.get(key),"%%"+params.get(key)+"%"));
-                    }
-                case "name":
-                    if (!key.isEmpty() && key != null){
-                        predicates.add(cb.like(personRoot.get(key),"%%"+params.get(key)+"%"));
-                    }
-                    break;
-                case "surname":
-                    if (key.isEmpty() && key != null){
-                        predicates.add(cb.like(personRoot.get(key),"%%"+params.get(key)+"%"));
-                    }
-                    break;
-                case "createdDateFrom":
-                    if (key.isEmpty() && key != null){
-                        predicates.add(cb.like(personRoot.get(key),"%%"+params.get(key)+"%"));
-                    }
-                    break;
-                case "createdDateTo":
-                    if (key.isEmpty() && key != null){
-                        predicates.add(cb.like(personRoot.get(key),"%%"+params.get(key)+"%"));
-                    }
-                    break;
-                case "oderBy":
-                    if (key.isEmpty() && key != null){
-                                criteriaQuery.orderBy(cb.asc(personRoot.get(params.get(key))));
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return List.of();
-    }
 
     @Override
     public Person getPersonById(Long id) {

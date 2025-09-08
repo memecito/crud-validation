@@ -1,5 +1,6 @@
 package es.nter.crud_validation.presentation.dto.student;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import es.nter.crud_validation.domain.models.Branch;
 import es.nter.crud_validation.presentation.dto.person.PersonDtoFull;
 import es.nter.crud_validation.presentation.dto.subject.SubjectOutDtoMini;
@@ -13,6 +14,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class StudentOutDtoFull {
     private Long id;
 
