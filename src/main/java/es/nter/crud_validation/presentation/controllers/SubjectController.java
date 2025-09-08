@@ -80,7 +80,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletedSubject(@PathVariable Long id){
+    public ResponseEntity<String> deletedSubject(@PathVariable Long id){
 
         subjectService.deleteSubject(id);
         return ResponseEntity.ok().body("Subject eliminada");
