@@ -8,6 +8,10 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -23,42 +27,69 @@ public class PersonRepositoryImpl implements PersonCriteriaRepository {
     EntityManager em;
 
     @Override
-    public List<Person> findPersonByCustomParam(Map<String, String> params) {
+    public Page<Person> findPersonByCustomParam(Map<String, String> params, Pageable pageable) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Person> criteriaQuery = cb.createQuery(Person.class);
-        Root<Person> personRoot = criteriaQuery.from(Person.class);
 
-        List<Predicate> predicates = new ArrayList<>();
+        // --- 1. Preparación de la CONSULTA DE DATOS ---
+        CriteriaQuery<Person> dataQuery = cb.createQuery(Person.class);
+        Root<Person> dataRoot = dataQuery.from(Person.class);
+        List<Predicate> dataPredicates = new ArrayList<>();
 
+        // --- 2. Preparación de la CONSULTA DE CONTEO ---
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<Person> countRoot = countQuery.from(Person.class); // <-- El FROM para la consulta de conteo
+        List<Predicate> countPredicates = new ArrayList<>();
 
-        String orderByField= params.get("orderBy");
-        if(orderByField!=null && !orderByField.isEmpty()){
-            criteriaQuery.orderBy(cb.asc(personRoot.get(orderByField)));
-        }
-
-        params.forEach((key,value)->{
-            if(value==null || value.isEmpty()){
-                return;
+        // --- 3. Lógica para construir los PREDICADOS (se aplica a ambas consultas) ---
+        params.forEach((key, value) -> {
+            if (value == null || value.isEmpty() || key.equals("orderBy")) {
+                return; // Ignora valores vacíos y la clave de ordenación
             }
-            switch (key){
+            switch (key) {
                 case "username":
                 case "name":
                 case "surname":
-                    predicates.add(cb.like(personRoot.get(key), "%"+value+"%"));
+                    dataPredicates.add(cb.like(dataRoot.get(key), "%" + value + "%"));
+                    countPredicates.add(cb.like(countRoot.get(key), "%" + value + "%"));
                     break;
                 case "createdDateFrom":
-                    LocalDate fromDate= LocalDate.parse(value, DateTimeFormatter.ISO_DATE);
-                    predicates.add(cb.greaterThanOrEqualTo(personRoot.get("createdDate"), fromDate));
+                    LocalDate fromDate = LocalDate.parse(value, DateTimeFormatter.ISO_LOCAL_DATE);
+                    dataPredicates.add(cb.greaterThanOrEqualTo(dataRoot.get("createdDate"), fromDate));
+                    countPredicates.add(cb.greaterThanOrEqualTo(countRoot.get("createdDate"), fromDate));
                     break;
                 case "createdDateTo":
-                    LocalDate toDate= LocalDate.parse(value, DateTimeFormatter.ISO_DATE);
-                    predicates.add(cb.lessThanOrEqualTo(personRoot.get("createdDate"), toDate));
+                    LocalDate toDate = LocalDate.parse(value, DateTimeFormatter.ISO_LOCAL_DATE);
+                    dataPredicates.add(cb.lessThanOrEqualTo(dataRoot.get("createdDate"), toDate));
+                    countPredicates.add(cb.lessThanOrEqualTo(countRoot.get("createdDate"), toDate));
                     break;
-
             }
         });
-        criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        List<Person> objectsList= em.createQuery(criteriaQuery).getResultList();
-        return objectsList;
+
+        // --- 4. Ejecutar la CONSULTA DE CONTEO ---
+        countQuery.select(cb.count(countRoot)).where(countPredicates.toArray(new Predicate[0]));
+        Long total = em.createQuery(countQuery).getSingleResult();
+
+        // Si no hay resultados, no es necesario ejecutar la consulta de datos
+        if (total == 0) {
+            return new PageImpl<>(new ArrayList<>(), pageable, 0);
+        }
+
+        // --- 5. Ejecutar la CONSULTA DE DATOS ---
+        dataQuery.where(dataPredicates.toArray(new Predicate[0]));
+
+        String orderByField = params.get("orderBy");
+        if (orderByField != null && !orderByField.isEmpty()) {
+            dataQuery.orderBy(cb.asc(dataRoot.get(orderByField)));
+        }
+
+        List<Person> personList = em.createQuery(dataQuery)
+                .setFirstResult((int) pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+
+        // --- 6. Devolver el resultado ---
+        return new PageImpl<>(personList, pageable, total);
     }
+
+
 }

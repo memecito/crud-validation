@@ -34,38 +34,40 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<List<PersonOutDtoMini>> getAllPersonActive(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
         return ResponseEntity.ok(
-                personService.getAllPersonActive(pageNumber,pageSize)
+                personService.getAllPersonActive(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
-                        .collect(Collectors.toList())) ;
+                        .collect(Collectors.toList()));
     }
 
     @GetMapping("/sindto")
     public ResponseEntity<List<Person>> getAllPersonSinDto(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
 
         return ResponseEntity.ok(
-                personService.getAllPersonActive(pageNumber,pageSize)
-                        ) ;
+                personService.getAllPersonActive(pageNumber, pageSize)
+        );
     }
 
     @GetMapping("/criteria")
-    public ResponseEntity<List<PersonOutDtoMini>> getPersonsParams(@RequestParam Map<String, String> params){
+    public ResponseEntity<List<PersonOutDtoMini>> getPersonsParams(@RequestParam Map<String, String> params,
+                                                                   @RequestParam(name="page")int page,
+                                                                   @RequestParam(name="size", defaultValue = "10", required = false)int size) {
         return ResponseEntity.ok(
-                personService.getPersonCRiteria(params).stream().map(personMapper::toDtoMini).collect(Collectors.toList())
+                personService.getPersonCriteria(params,page, size).stream().map(personMapper::toDtoMini).collect(Collectors.toList())
         );
     }
 
     @GetMapping("/nobody")
     public ResponseEntity<List<PersonOutDtoMini>> getPersonNobody(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
 
         return ResponseEntity.ok(
-                personService.getPersonNobody(pageNumber,pageSize)
+                personService.getPersonNobody(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
                         .collect(Collectors.toList())
         );
@@ -73,55 +75,56 @@ public class PersonController {
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonOutDtoMini>> getAllPerson(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "10", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "10", required = false) int pageSize) {
 
         return ResponseEntity.ok(
                 personService.getAllPerson(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
-                            .collect(Collectors.toList()));
+                        .collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPersonById(@PathVariable Long id){
+    public ResponseEntity<?> getPersonById(@PathVariable Long id) {
 
-        Person person= personService.getPersonById(id);
+        Person person = personService.getPersonById(id);
 
-        return switch (person.getRol()){
-            case STUDENT-> ResponseEntity.ok(personMapper.toDtoStudent(person));
-            case TEACHER-> ResponseEntity.ok(
-                   personMapper.toDtoTeacher(person));
+        return switch (person.getRol()) {
+            case STUDENT -> ResponseEntity.ok(personMapper.toDtoStudent(person));
+            case TEACHER -> ResponseEntity.ok(
+                    personMapper.toDtoTeacher(person));
             default -> ResponseEntity.ok(personMapper.toDtoStandard(person));
         };
     }
 
     @GetMapping("/name")
-    public void getPersonByName(@RequestParam("name") String name){
-        getPersonById(personService.getPersonByName(name).getId());;
+    public void getPersonByName(@RequestParam("name") String name) {
+        getPersonById(personService.getPersonByName(name).getId());
+        ;
     }
 
     @PostMapping
-    public ResponseEntity<PersonDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto){
+    public ResponseEntity<PersonDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto) {
         return
                 ResponseEntity.status(HttpStatus.CREATED).body(
                         personMapper.toDtoStandard(
-                            personService.addPerson(
-                                personMapper.toModelStandard(personInputDto))));
+                                personService.addPerson(
+                                        personMapper.toModelStandard(personInputDto))));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> updatePerson(
             @PathVariable long id,
-            @RequestBody PersonInputDto personInputDto){
+            @RequestBody PersonInputDto personInputDto) {
         return ResponseEntity.ok(
                 personMapper.toDtoStandard(
-                    personService.updatePerson(id,
-                        personMapper.toModelStandard(personInputDto))));
+                        personService.updatePerson(id,
+                                personMapper.toModelStandard(personInputDto))));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePersonById(@PathVariable Long id){
-       personService.deletePersonById(id);
-       return ResponseEntity.ok().body("persona eliminada");
+    public ResponseEntity deletePersonById(@PathVariable Long id) {
+        personService.deletePersonById(id);
+        return ResponseEntity.ok().body("persona eliminada");
     }
 }

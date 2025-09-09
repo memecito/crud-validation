@@ -15,7 +15,9 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,8 +82,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getPersonCRiteria(Map<String, String> params){
-        return personRepository.findPersonByCustomParam(params);
+    public Page<Person> getPersonCriteria(Map<String, String> params, int page, int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Pageable pageable= PageRequest.of(page,size);
+        return personRepository.findPersonByCustomParam(params, pageable);
     }
 
     @Override

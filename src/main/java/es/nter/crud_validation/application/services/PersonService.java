@@ -1,6 +1,7 @@
 package es.nter.crud_validation.application.services;
 
 import es.nter.crud_validation.domain.models.Person;
+import org.springframework.data.domain.Page;
 
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface PersonService {
 
     Person getPersonByUserName(String userName);
 
-    List<Person> getPersonCRiteria(Map<String, String> params);
+    Page<Person> getPersonCriteria(Map<String, String> params, int page, int size);
 
     Person addPerson(Person person);
 
