@@ -22,6 +22,8 @@ public interface PersonService {
 
     Person getPersonByUserName(String userName);
 
+    List<Person> getPersonCRiteria(Map<String, String> params);
+
     Person addPerson(Person person);
 
     Person updatePerson(long id, Person person);

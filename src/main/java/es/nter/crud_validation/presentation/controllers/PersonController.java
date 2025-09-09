@@ -5,6 +5,7 @@ import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.application.services.TeacherService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
+import es.nter.crud_validation.presentation.dto.person.PersonDtoFull;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import es.nter.crud_validation.application.mappers.PersonMapper;
@@ -52,9 +53,10 @@ public class PersonController {
     }
 
     @GetMapping("/criteria")
-    public ResponseEntity<?> getPersonsParams(@RequestParam Map<String, String> params){
-
-        return null;
+    public ResponseEntity<List<PersonOutDtoMini>> getPersonsParams(@RequestParam Map<String, String> params){
+        return ResponseEntity.ok(
+                personService.getPersonCRiteria(params).stream().map(personMapper::toDtoMini).collect(Collectors.toList())
+        );
     }
 
     @GetMapping("/nobody")

@@ -3,19 +3,23 @@ package es.nter.crud_validation.infraestructure.repositories.impl;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.infraestructure.repositories.PersonCriteriaRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
-public abstract class PersonRepositoryImpl implements PersonCriteriaRepository {
-
+public class PersonRepositoryImpl implements PersonCriteriaRepository {
+    @PersistenceContext
     EntityManager em;
 
     @Override
@@ -25,42 +29,36 @@ public abstract class PersonRepositoryImpl implements PersonCriteriaRepository {
         Root<Person> personRoot = criteriaQuery.from(Person.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        for (String key : params.keySet()) {
-            switch (key) {
-                case "user":
-                    if (!key.isEmpty() && key != null) {
-                        predicates.add(cb.like(personRoot.get(key), "%%" + params.get(key) + "%"));
-                    }
+
+
+        String orderByField= params.get("orderBy");
+        if(orderByField!=null && !orderByField.isEmpty()){
+            criteriaQuery.orderBy(cb.asc(personRoot.get(orderByField)));
+        }
+
+        params.forEach((key,value)->{
+            if(value==null || value.isEmpty()){
+                return;
+            }
+            switch (key){
+                case "username":
                 case "name":
-                    if (!key.isEmpty() && key != null) {
-                        predicates.add(cb.like(personRoot.get(key), "%%" + params.get(key) + "%"));
-                    }
-                    break;
                 case "surname":
-                    if (key.isEmpty() && key != null) {
-                        predicates.add(cb.like(personRoot.get(key), "%%" + params.get(key) + "%"));
-                    }
+                    predicates.add(cb.like(personRoot.get(key), "%"+value+"%"));
                     break;
                 case "createdDateFrom":
-                    if (key.isEmpty() && key != null) {
-                        predicates.add(cb.like(personRoot.get(key), "%%" + params.get(key) + "%"));
-                    }
+                    LocalDate fromDate= LocalDate.parse(value, DateTimeFormatter.ISO_DATE);
+                    predicates.add(cb.greaterThanOrEqualTo(personRoot.get("createdDate"), fromDate));
                     break;
                 case "createdDateTo":
-                    if (key.isEmpty() && key != null) {
-                        predicates.add(cb.like(personRoot.get(key), "%%" + params.get(key) + "%"));
-                    }
+                    LocalDate toDate= LocalDate.parse(value, DateTimeFormatter.ISO_DATE);
+                    predicates.add(cb.lessThanOrEqualTo(personRoot.get("createdDate"), toDate));
                     break;
-                case "oderBy":
-                    if (key.isEmpty() && key != null) {
-                        criteriaQuery.orderBy(cb.asc(personRoot.get(params.get(key))));
-                    }
-                    break;
-                default:
-                    break;
+
             }
-        }
+        });
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        return em.createQuery(criteriaQuery).getResultList();
+        List<Person> objectsList= em.createQuery(criteriaQuery).getResultList();
+        return objectsList;
     }
 }

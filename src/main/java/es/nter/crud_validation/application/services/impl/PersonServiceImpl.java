@@ -80,6 +80,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<Person> getPersonCRiteria(Map<String, String> params){
+        return personRepository.findPersonByCustomParam(params);
+    }
+
+    @Override
     @Transactional
     public Person addPerson(Person person) {
 

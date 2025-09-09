@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Map;
 
-public interface PersonCriteriaRepository extends JpaRepository<Person, Long> {
+public interface PersonCriteriaRepository {
 
     List<Person> findPersonByCustomParam(Map<String, String> params);
 }
