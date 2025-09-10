@@ -4,6 +4,7 @@ import es.nter.crud_validation.application.services.AuthService;
 import es.nter.crud_validation.configuration.security.JwtService;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
+import es.nter.crud_validation.exceptions.InvalidTokenException;
 import es.nter.crud_validation.exceptions.PersonNameException;
 import es.nter.crud_validation.exceptions.UnauthenticatedException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Set;
+import static es.nter.crud_validation.presentation.controllers.PersonController.REFRESH_TOKEN_COOKIE;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public AuthTokens register(Person person) {
+    public AuthTokens register(Person person) throws BadRequestException {
         if (personRepository.existsByUsername(person.getUsername()))
             throw new BadRequestException("User name exists");
 
@@ -76,7 +77,11 @@ public class AuthServiceImpl implements AuthService {
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(jwtService.extractUsername(refreshToken));
 
-
-        return null;
+        if(!jwtService.isValidRefreshToken(refreshToken,userDetails))
+            throw new InvalidTokenException("Invalid or expired refresh token") ;
+        return new AuthTokens(
+                jwtService.generateAccessToken(userDetails),
+                jwtService.generateRefreshToken(userDetails)
+        );
     }
 }
