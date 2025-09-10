@@ -22,4 +22,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     List<Person> findByRolIs(Rol rol, PageRequest pageRequest);
 
     Optional<Person> findByUsernameIs(String username);
+
+    boolean existsByUsername(String username);
 }

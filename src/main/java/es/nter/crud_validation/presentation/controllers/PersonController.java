@@ -4,10 +4,12 @@ import es.nter.crud_validation.application.mappers.TeacherMapper;
 import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.application.services.TeacherService;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.presentation.dto.auth.PersonAuthDto;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import es.nter.crud_validation.application.mappers.PersonMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,8 @@ public class PersonController {
 
     private final PersonService personService;
     private final PersonMapper personMapper;
+
+    public final static String REFRESH_TOKEN_COOKIE= "regreshToken";
 
     private final TeacherService teacherService;
     private final TeacherMapper teacherMapper;
@@ -98,6 +102,19 @@ public class PersonController {
                             personService.addPerson(
                                 personMapper.toModelStandard(personInputDto))));
     }
+
+    @PostMapping("/register")
+    public  ResponseEntity<?> register(@RequestBody PersonInputDto personInputDto,
+                                       HttpServletResponse response){
+        return ResponseEntity.ok("metodo vacio");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody PersonAuthDto personAuthDto,
+                                   HttpServletResponse response){
+        return ResponseEntity.ok("medotod vacio");
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> updatePerson(

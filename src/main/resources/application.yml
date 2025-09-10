@@ -1,5 +1,11 @@
 server:
-  port: 8081
+  port: 8080
+security:
+  jwt:
+    secure-access: false
+    secret-key: c5cce0a3980ae936bbb7ec9c526f4057043c28b0da0bbb5caca7b713ad2de9df
+    access-token-expiration: 3600000
+    regres-token-expiration: 604800000
 spring:
   sql:
     init:

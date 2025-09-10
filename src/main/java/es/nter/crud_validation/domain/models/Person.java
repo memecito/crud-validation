@@ -51,6 +51,8 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Rol rol = Rol.NOBODY;
 
+    private boolean admin;
+
     //RELACIONES
     @JsonManagedReference
     @OneToOne(
