@@ -5,12 +5,14 @@ import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
+import es.nter.crud_validation.exceptions.BadUserException;
 import es.nter.crud_validation.exceptions.DeletePersonException;
 import es.nter.crud_validation.exceptions.EntityDuplicateException;
 import es.nter.crud_validation.exceptions.EntityNotFoundException;
 import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -89,6 +91,18 @@ public class PersonServiceImpl implements PersonService {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         Person personSaved= personRepository.save(person);
         UserDetails userDetails= userDetailsService.loadUserByUsername(personSaved.getUsername());
+        return new AuthTokens(
+                jwtService.generateAccessToken(userDetails),
+                jwtService.generateRefreshToken(userDetails)
+        );
+    }
+
+    @Override
+    public AuthTokens authenticate(Person person) {
+        Person personFound= personRepository.findByUsername(person.getUsername())
+                .orElseThrow(()->new BadUserException("Usuario novalido"));
+        UserDetails userDetails= userDetailsService.loadUserByUsername(personFound.getUsername());
+
         return new AuthTokens(
                 jwtService.generateAccessToken(userDetails),
                 jwtService.generateRefreshToken(userDetails)

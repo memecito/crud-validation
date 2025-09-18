@@ -1,6 +1,7 @@
 package es.nter.crud_validation.application.mappers;
 
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.presentation.dto.auth.AuthInDto;
 import es.nter.crud_validation.presentation.dto.person.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,7 +16,8 @@ public interface PersonMapper {
 
     //INPUTS
     Person toModelStandard(PersonInputDto personInputDto);
-    Person toModelId(PersonInputDtoId personInputDtoId);
+    @Mapping(target = "id", ignore = true)
+    Person toModelAuth(AuthInDto authInDto);
 
     Person update(@MappingTarget Person target, Person source);
 

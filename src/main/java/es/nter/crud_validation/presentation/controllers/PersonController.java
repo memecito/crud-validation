@@ -6,6 +6,7 @@ import es.nter.crud_validation.application.services.TeacherService;
 import es.nter.crud_validation.application.services.impl.JwtService;
 import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.presentation.dto.auth.AuthInDto;
 import es.nter.crud_validation.presentation.dto.auth.AuthOutDto;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
@@ -113,6 +114,18 @@ public class PersonController {
                                 jwtService.getAccessTokenExpiration()
                         )
                 );
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthOutDto> login(@Valid @RequestBody AuthInDto authInDto, HttpServletResponse response){
+        AuthTokens authTokens= personService.authenticate(personMapper.toModelAuth(authInDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new AuthOutDto(
+                        HttpStatus.CREATED.value(),
+                        authTokens.accesToken(),
+                        jwtService.getAccessTokenExpiration()
+                )
+        );
     }
 
     @PutMapping("/{id}")

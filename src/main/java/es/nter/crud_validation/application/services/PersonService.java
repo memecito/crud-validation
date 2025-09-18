@@ -19,6 +19,7 @@ public interface PersonService {
     Person getPersonByUserName(String userName);
 
     AuthTokens addPerson(Person person);
+    AuthTokens authenticate(Person person);
 
     Person updatePerson(long id,Person person);
 
