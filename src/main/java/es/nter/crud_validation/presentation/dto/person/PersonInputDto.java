@@ -33,6 +33,9 @@ public class PersonInputDto {
     @NotNull(message = "Fecha de creacion obligatorio")
     private Date createdDate;
 
+    private boolean admin=false;
+
+
     private String imageUrl;
     private Date terminationDate;
 }

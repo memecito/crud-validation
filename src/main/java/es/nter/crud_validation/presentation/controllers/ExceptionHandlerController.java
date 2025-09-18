@@ -77,6 +77,25 @@ public class ExceptionHandlerController {
         );
         return new ResponseEntity<>(customError, HttpStatus.I_AM_A_TEAPOT);
     }
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<CustomError> handleFUnauthorizedException(UnauthorizedException ex) {
+        CustomError customError = new CustomError(
+                HttpStatus.I_AM_A_TEAPOT.value(),
+                "Direccion no permitida",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError, HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    @ExceptionHandler(UnauthenticatedException.class)
+    public ResponseEntity<CustomError> handleUnauthenticatedException(UnauthenticatedException ex) {
+        CustomError customError = new CustomError(
+                HttpStatus.I_AM_A_TEAPOT.value(),
+                "Direccion no permitida",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError, HttpStatus.I_AM_A_TEAPOT);
+    }
 
     @ExceptionHandler(value = {StudentCreatedException.class})
     public ResponseEntity<CustomError> handleStudentCreatedEntity(StudentCreatedException ex) {

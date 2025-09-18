@@ -1,5 +1,6 @@
 package es.nter.crud_validation.application.services;
 
+import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
 
 
@@ -17,7 +18,7 @@ public interface PersonService {
     Person getPersonByName(String name);
     Person getPersonByUserName(String userName);
 
-    Person addPerson(Person person);
+    AuthTokens addPerson(Person person);
 
     Person updatePerson(long id,Person person);
 

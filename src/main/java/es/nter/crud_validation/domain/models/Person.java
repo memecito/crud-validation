@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -51,6 +53,8 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Rol rol = Rol.NOBODY;
 
+    private boolean admin;
+
     //RELACIONES
     @JsonManagedReference
     @OneToOne(
@@ -68,6 +72,11 @@ public class Person {
             orphanRemoval = true)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
+
+    @OneToMany(mappedBy = "person",
+    orphanRemoval = true,
+    cascade = CascadeType.ALL)
+    private Set<Tokens> tokens =new HashSet<>();
 
 
 }

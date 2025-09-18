@@ -3,17 +3,24 @@ package es.nter.crud_validation.presentation.controllers;
 import es.nter.crud_validation.application.mappers.TeacherMapper;
 import es.nter.crud_validation.application.services.PersonService;
 import es.nter.crud_validation.application.services.TeacherService;
+import es.nter.crud_validation.application.services.impl.JwtService;
+import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.presentation.dto.auth.AuthOutDto;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
 import es.nter.crud_validation.presentation.dto.person.PersonInputDto;
 import es.nter.crud_validation.presentation.dto.person.PersonOutDtoMini;
 import es.nter.crud_validation.application.mappers.PersonMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +33,10 @@ public class PersonController {
     private final PersonService personService;
     private final PersonMapper personMapper;
 
-    private final TeacherService teacherService;
-    private final TeacherMapper teacherMapper;
+    private final JwtService jwtService;
+
+    public final static String REFRESH_TOKEN_COOKIE = "refreshToken";
+
 
     @GetMapping
     public ResponseEntity<List<PersonOutDtoMini>> getAllPersonActive(
@@ -90,13 +99,20 @@ public class PersonController {
         getPersonById(personService.getPersonByName(name).getId());;
     }
 
-    @PostMapping
-    public ResponseEntity<PersonDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto){
+    @PostMapping("/register")
+    public ResponseEntity<AuthOutDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto, HttpServletResponse response){
+
+        AuthTokens authTokens=  personService.addPerson(
+                personMapper.toModelStandard(personInputDto));
+        setRefreshTokenCookie(response, authTokens.refreshToken());
         return
                 ResponseEntity.status(HttpStatus.CREATED).body(
-                        personMapper.toDtoStandard(
-                            personService.addPerson(
-                                personMapper.toModelStandard(personInputDto))));
+                        new AuthOutDto(
+                                HttpStatus.CREATED.value(),
+                                authTokens.accesToken(),
+                                jwtService.getAccessTokenExpiration()
+                        )
+                );
     }
 
     @PutMapping("/{id}")
@@ -113,5 +129,20 @@ public class PersonController {
     public ResponseEntity deletePersonById(@PathVariable Long id){
        personService.deletePersonById(id);
        return ResponseEntity.ok().body("persona eliminada");
+    }
+
+    private void setRefreshTokenCookie(HttpServletResponse response, String refreshToken) {
+        ResponseCookie refreshCookie = ResponseCookie.from(REFRESH_TOKEN_COOKIE, refreshToken)
+                .httpOnly(true)
+                .secure(jwtService.isSecureAccess()) // En entornos productivos debería ir en true
+                .path("/auth/refresh")
+                .maxAge(Duration.ofDays(7))
+                .sameSite("Lax")
+                .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
+        response.setHeader("X-Content-Type-Options", "nosniff");
+        response.setHeader("X-Frame-Options", "DENY");
+
     }
 }

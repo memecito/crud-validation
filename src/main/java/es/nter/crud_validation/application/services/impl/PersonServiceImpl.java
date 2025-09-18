@@ -2,6 +2,7 @@ package es.nter.crud_validation.application.services.impl;
 
 import es.nter.crud_validation.application.mappers.PersonMapper;
 import es.nter.crud_validation.application.services.PersonService;
+import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
 import es.nter.crud_validation.domain.models.Rol;
 import es.nter.crud_validation.exceptions.DeletePersonException;
@@ -11,6 +12,8 @@ import es.nter.crud_validation.infraestructure.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,11 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final UserDetailsServiceImpl userDetailsService;
+    private final JwtService jwtService;
 
     @Override
     public List<Person> getAllPerson(int pageNumber, int pageSize) {
@@ -72,13 +80,19 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     @Transactional
-    public Person addPerson(Person person) {
+    public AuthTokens addPerson(Person person) {
 
         personRepository.findByUsername(person.getUsername())
                 .ifPresent(p -> {
                     throw new EntityDuplicateException("El usuario: " + p.getUsername() + " ya existe");
                 });
-        return personRepository.save(person);
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        Person personSaved= personRepository.save(person);
+        UserDetails userDetails= userDetailsService.loadUserByUsername(personSaved.getUsername());
+        return new AuthTokens(
+                jwtService.generateAccessToken(userDetails),
+                jwtService.generateRefreshToken(userDetails)
+        );
     }
 
     @Override
