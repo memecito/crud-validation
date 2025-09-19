@@ -6,6 +6,7 @@ import es.nter.crud_validation.application.services.TeacherService;
 import es.nter.crud_validation.application.services.impl.JwtService;
 import es.nter.crud_validation.domain.models.AuthTokens;
 import es.nter.crud_validation.domain.models.Person;
+import es.nter.crud_validation.domain.models.Tokens;
 import es.nter.crud_validation.presentation.dto.auth.AuthInDto;
 import es.nter.crud_validation.presentation.dto.auth.AuthOutDto;
 import es.nter.crud_validation.presentation.dto.person.PersonDto;
@@ -41,31 +42,31 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<List<PersonOutDtoMini>> getAllPersonActive(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
         return ResponseEntity.ok(
-                personService.getAllPersonActive(pageNumber,pageSize)
+                personService.getAllPersonActive(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
-                        .collect(Collectors.toList())) ;
+                        .collect(Collectors.toList()));
     }
 
     @GetMapping("/sindto")
     public ResponseEntity<List<Person>> getAllPersonSinDto(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
 
         return ResponseEntity.ok(
-                personService.getAllPersonActive(pageNumber,pageSize)
-                        ) ;
+                personService.getAllPersonActive(pageNumber, pageSize)
+        );
     }
 
     @GetMapping("/nobody")
     public ResponseEntity<List<PersonOutDtoMini>> getPersonNobody(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "5", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "5", required = false) int pageSize) {
 
         return ResponseEntity.ok(
-                personService.getPersonNobody(pageNumber,pageSize)
+                personService.getPersonNobody(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
                         .collect(Collectors.toList())
         );
@@ -73,52 +74,51 @@ public class PersonController {
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonOutDtoMini>> getAllPerson(
-            @RequestParam (defaultValue = "0", required = false) int pageNumber,
-            @RequestParam (defaultValue = "10", required = false) int pageSize){
+            @RequestParam(defaultValue = "0", required = false) int pageNumber,
+            @RequestParam(defaultValue = "10", required = false) int pageSize) {
 
         return ResponseEntity.ok(
                 personService.getAllPerson(pageNumber, pageSize)
                         .stream().map(personMapper::toDtoMini)
-                            .collect(Collectors.toList()));
+                        .collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPersonById(@PathVariable Long id){
+    public ResponseEntity<?> getPersonById(@PathVariable Long id) {
 
-        Person person= personService.getPersonById(id);
+        Person person = personService.getPersonById(id);
 
-        return switch (person.getRol()){
-            case STUDENT-> ResponseEntity.ok(personMapper.toDtoStudent(person));
-            case TEACHER-> ResponseEntity.ok(
-                   personMapper.toDtoTeacher(person));
+        return switch (person.getRol()) {
+            case STUDENT -> ResponseEntity.ok(personMapper.toDtoStudent(person));
+            case TEACHER -> ResponseEntity.ok(
+                    personMapper.toDtoTeacher(person));
             default -> ResponseEntity.ok(personMapper.toDtoStandard(person));
         };
     }
 
     @GetMapping("/name")
-    public void getPersonByName(@RequestParam("name") String name){
-        getPersonById(personService.getPersonByName(name).getId());;
+    public void getPersonByName(@RequestParam("name") String name) {
+        getPersonById(personService.getPersonByName(name).getId());
+        ;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthOutDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto, HttpServletResponse response){
-
-        AuthTokens authTokens=  personService.addPerson(
+    public ResponseEntity<AuthOutDto> createPerson(@Valid @RequestBody PersonInputDto personInputDto, HttpServletResponse response) {
+        Tokens tokens = personService.addPerson(
                 personMapper.toModelStandard(personInputDto));
-        setRefreshTokenCookie(response, authTokens.refreshToken());
-        return
-                ResponseEntity.status(HttpStatus.CREATED).body(
-                        new AuthOutDto(
-                                HttpStatus.CREATED.value(),
-                                authTokens.accesToken(),
-                                jwtService.getAccessTokenExpiration()
-                        )
-                );
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new AuthOutDto(
+                        HttpStatus.CREATED.value(),
+                        tokens.getToken(),
+                        jwtService.getAccessTokenExpiration()
+                )
+        );
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthOutDto> login(@Valid @RequestBody AuthInDto authInDto, HttpServletResponse response){
-        AuthTokens authTokens= personService.authenticate(personMapper.toModelAuth(authInDto));
+    public ResponseEntity<AuthOutDto> login(@Valid @RequestBody AuthInDto authInDto, HttpServletResponse response) {
+        AuthTokens authTokens = personService.authenticate(personMapper.toModelAuth(authInDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 new AuthOutDto(
                         HttpStatus.CREATED.value(),
@@ -131,17 +131,17 @@ public class PersonController {
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> updatePerson(
             @PathVariable long id,
-            @RequestBody PersonInputDto personInputDto){
+            @RequestBody PersonInputDto personInputDto) {
         return ResponseEntity.ok(
                 personMapper.toDtoStandard(
-                    personService.updatePerson(id,
-                        personMapper.toModelStandard(personInputDto))));
+                        personService.updatePerson(id,
+                                personMapper.toModelStandard(personInputDto))));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePersonById(@PathVariable Long id){
-       personService.deletePersonById(id);
-       return ResponseEntity.ok().body("persona eliminada");
+    public ResponseEntity deletePersonById(@PathVariable Long id) {
+        personService.deletePersonById(id);
+        return ResponseEntity.ok().body("persona eliminada");
     }
 
     private void setRefreshTokenCookie(HttpServletResponse response, String refreshToken) {

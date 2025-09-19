@@ -96,6 +96,15 @@ public class ExceptionHandlerController {
         );
         return new ResponseEntity<>(customError, HttpStatus.I_AM_A_TEAPOT);
     }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<CustomError> handleBadRequestException(BadRequestException ex) {
+        CustomError customError = new CustomError(
+                HttpStatus.I_AM_A_TEAPOT.value(),
+                "Mala Respuesta",
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(customError, HttpStatus.I_AM_A_TEAPOT);
+    }
 
     @ExceptionHandler(value = {StudentCreatedException.class})
     public ResponseEntity<CustomError> handleStudentCreatedEntity(StudentCreatedException ex) {
